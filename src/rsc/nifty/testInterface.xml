@@ -6,7 +6,7 @@
 	<screen id="start" controller="testpackage.nifty.MarsLandingStartScreen">
 		<layer childLayout="vertical" >
 			<panel id="panel_top" height="25%" width="100%" align="center" childLayout="vertical"
-			       backgroundColor="#f008">
+			       backgroundColor="#f00f">
 				<text text="One Way 2 Mars" font="Interface/Fonts/Default.fnt" width="100%" />
 
 				<text id="synopsis" text="&#10;&#10; Ich bin Elon. Ich wurde programmiert, um die erste humaniode Mars Mission zu steuern.

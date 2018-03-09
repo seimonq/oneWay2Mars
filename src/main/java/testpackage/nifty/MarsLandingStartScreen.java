@@ -1,32 +1,48 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package testpackage.nifty;
 
 import com.jme3.app.Application;
-import com.jme3.app.state.AbstractAppState;
-import com.jme3.app.state.AppStateManager;
+import com.jme3.app.state.BaseAppState;
+import com.jme3.asset.AssetManager;
+import com.jme3.audio.AudioRenderer;
+import com.jme3.input.InputManager;
+import com.jme3.math.ColorRGBA;
+import com.jme3.niftygui.NiftyJmeDisplay;
+import com.jme3.renderer.ViewPort;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyMethodInvoker;
 import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.controls.textfield.TextFieldControl;
-import de.lessvoid.nifty.controls.textfield.TextFieldInputMapping;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import testpackage.AlphaMarsApplication;
 
-public class MarsLandingStartScreen extends AbstractAppState implements ScreenController {
+public class MarsLandingStartScreen extends BaseAppState implements ScreenController {
 
     private Nifty nifty;
     private Screen screen;
+    private AlphaMarsApplication app;
+    private AssetManager assetManager;
+    private InputManager inputManager;
+    private AudioRenderer audioRenderer;
+    private ViewPort guiViewPort;
+    private NiftyJmeDisplay niftyDisplay;
 
     @Override
-    public void initialize(AppStateManager stateManager, Application app) {
-        super.initialize(stateManager, app);
-        //TODO: initialize your AppState, e.g. attach spatials to rootNode
-        //this is called on the OpenGL thread after the AppState has been attached
+    public void initialize(Application app) {
+        this.app = (AlphaMarsApplication) app;
+        this.assetManager = app.getAssetManager();
+        this.inputManager = app.getInputManager();
+        this.audioRenderer= app.getAudioRenderer();
+        this.guiViewPort  = app.getGuiViewPort();
+
+        /** start Nifty example landing game*/
+        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
+                assetManager, inputManager, audioRenderer, guiViewPort);
+        nifty = niftyDisplay.getNifty();
+        nifty.fromXml("testInterface.xml", "start",new MarsLandingStartScreen());
+
     }
 
     @Override
@@ -35,23 +51,35 @@ public class MarsLandingStartScreen extends AbstractAppState implements ScreenCo
     }
 
     @Override
-    public void cleanup() {
-        super.cleanup();
-        //TODO: clean up what you initialized in the initialize method,
-        //e.g. remove all spatials from rootNode
-        //this is called on the OpenGL thread after the AppState has been detached
+    public void cleanup(Application app) {
+    }
+
+    @Override
+    public void onDisable() {
+        guiViewPort.clearProcessors();
+        guiViewPort.setBackgroundColor(ColorRGBA.Black);
+
+    }
+
+    @Override
+    public void onEnable() {
+        guiViewPort.setBackgroundColor(ColorRGBA.Green);
+        guiViewPort.addProcessor(niftyDisplay);
+
+
+
     }
 
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
-
     }
 
     public void onStartScreen() {
         Element landingButton = nifty.getCurrentScreen().findElementById("landingButton");
         landingButton.getElementInteraction().getPrimary().setOnClickMethod(new NiftyMethodInvoker(nifty, "startLanding()", this));
-        landingButton.bindControls(nifty.getCurrentScreen());    }
+        landingButton.bindControls(nifty.getCurrentScreen());
+   }
 
     public void onEndScreen() {
         //throw new UnsupportedOperationException("Not supported yet.");

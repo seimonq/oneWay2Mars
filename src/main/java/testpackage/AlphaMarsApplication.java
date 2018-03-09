@@ -1,22 +1,22 @@
 package testpackage;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.input.KeyInput;
+import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.jme3.material.Material;
-import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Box;
 import com.jme3.system.AppSettings;
-import de.lessvoid.nifty.Nifty;
 import testpackage.nifty.MarsLandingStartScreen;
+import testpackage.states.ImageTestState;
 
 public class AlphaMarsApplication extends SimpleApplication {
 
-    protected Geometry image;
     protected Geometry movingBox;
+    protected BaseAppState marsLandingGame;
+    protected BaseAppState imageMars;
 
     public static void main(String[] args) {
         AlphaMarsApplication app = new AlphaMarsApplication();
@@ -31,24 +31,24 @@ public class AlphaMarsApplication extends SimpleApplication {
         mySettings.setResolution(1024, 768);
 
         app.setSettings(mySettings);
-
+        app.settings.setAudioRenderer(null);
         app.start(); // start the game
+
     }
 
 
     @Override
     public void simpleInitApp() {
-
         doConfigurationAndBindung();
+        marsLandingGame = new MarsLandingStartScreen();
+        imageMars = new ImageTestState();
 
-        createBackgroundImage();
-            /** start Nifty example landing game*/
-        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
-                assetManager, inputManager, audioRenderer, guiViewPort);
-        Nifty nifty = niftyDisplay.getNifty();
-        nifty.fromXml("testInterface.xml", "start",new MarsLandingStartScreen());
+        stateManager.attach(marsLandingGame);
+        stateManager.attach(imageMars);
 
-        guiViewPort.addProcessor(niftyDisplay);
+            //attach gui here
+        stateManager.getState(MarsLandingStartScreen.class).setEnabled(true);
+        stateManager.getState(ImageTestState.class).setEnabled(false);
 
     }
 
@@ -63,7 +63,7 @@ public class AlphaMarsApplication extends SimpleApplication {
         public void onAnalog(String name, float value, float tpf) {
 
             if (name.equals("Up")) {
-                movingBox.move(0, 1 * tpf, 0);
+                rootNode.getChild("movingBox").move(0, 1 * tpf, 0);
             }
             if (name.equals("Down")) {
                 movingBox.move(0, -1 * tpf, 0);
@@ -75,6 +75,20 @@ public class AlphaMarsApplication extends SimpleApplication {
                 movingBox.move(1 * tpf, 0, 0);
             }
 
+
+        }
+    };
+    private final ActionListener actionListener = new ActionListener() {
+        public void onAction(String name, boolean keyPressed, float tpf) {
+            if(name.equals("I")) {
+                if(marsLandingGame.isEnabled()) {
+                    stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
+                    stateManager.getState(ImageTestState.class).setEnabled(true);
+                } else {
+                    stateManager.getState(MarsLandingStartScreen.class).setEnabled(true);
+                    stateManager.getState(ImageTestState.class).setEnabled(false);
+                }
+            }
         }
     };
     private void doConfigurationAndBindung() {
@@ -91,37 +105,10 @@ public class AlphaMarsApplication extends SimpleApplication {
         inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_DOWN));
         inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_LEFT));
         inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_RIGHT));
-        inputManager.addListener(analogListener, new String[]{"Up", "Down", "Left", "Right"});
+        inputManager.addMapping( "I", new KeyTrigger(KeyInput.KEY_I));
+        // inputManager.addListener(analogListener, new String[]{"Up", "Down", "Left", "Right"});
+        inputManager.addListener(actionListener, new String[] {"I"});
 
     }
-    private void createBackgroundImage() {
-        //create scene
-        Box b = new Box(5.5f, 5.5f, 0); // create cube shape
-        //background
-        image = new Geometry("Box", b);  // create cube geometry from the shape
-        Material tripToMars = new Material(
-                assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        tripToMars.setTexture("ColorMap",
-                assetManager.loadTexture("image_mars.jpg"));
-        image.setMaterial(tripToMars);                   // set the cube's material
-        image.move(0, 1, 0);
 
-        //attach to sceneGraph
-        rootNode.attachChild(image);              // make the cube appear in the scene
-
-    }
-    private void unusedFunctionWithMovingBox() {
-        Box c = new Box(1, 1, 0.5f); // create cube shape
-
-        //control box by keys
-        movingBox = new Geometry("movingBox", c);
-
-        Material defaulty = new Material(assetManager,
-                "Common/MatDefs/Misc/Unshaded.j3md");
-        defaulty.setTexture("ColorMap", assetManager.loadTexture(
-                "cartoon_return_from_mars.jpg"));
-        movingBox.setMaterial(defaulty);
-         rootNode.attachChild(movingBox);
-
-    }
 }
