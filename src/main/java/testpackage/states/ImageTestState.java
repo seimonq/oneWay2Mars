@@ -10,11 +10,11 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
-import testpackage.AlphaMarsApplication;
+import testpackage.AlphaAlphaMarsApplication;
 
 public class ImageTestState extends BaseAppState {
 
-    private AlphaMarsApplication app;
+    private AlphaAlphaMarsApplication app;
     private AssetManager assetManager;
     private InputManager inputManager;
     private AudioRenderer audioRenderer;
@@ -25,7 +25,7 @@ public class ImageTestState extends BaseAppState {
     @Override
     protected void initialize(Application application) {
 
-        this.app = (AlphaMarsApplication) application;
+        this.app = (AlphaAlphaMarsApplication) application;
         this.assetManager = app.getAssetManager();
         this.inputManager = app.getInputManager();
         this.audioRenderer= app.getAudioRenderer();

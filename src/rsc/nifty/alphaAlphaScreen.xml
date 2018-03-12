@@ -1,0 +1,29 @@
+<nifty xmlns="http://nifty-gui.lessvoid.com/nifty-gui"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://nifty-gui.lessvoid.com/nifty-gui http://nifty-gui.lessvoid.com/nifty-gui">
+	<useStyles filename="nifty-default-styles.xml" />
+	<useControls filename="nifty-default-controls.xml" />
+	<screen id="alphaAlphaScreen" controller="testpackage.nifty.AlphaAlphaScreenController">
+		<layer childLayout="vertical" >
+			<panel id="panelAlpha_top" height="25%" width="100%" align="center" childLayout="vertical"
+			       backgroundColor="#aa0f">
+				<text text="One Way 2 Mars" font="Interface/Fonts/Default.fnt" width="100%" />
+
+				<text id="synopsisAlpha" text="&#10;&#10; Ich bin Elon. Ich wurde programmiert, um die erste humaniode Mars Mission zu steuern.
+							&#10;Natürlich ohne Rückflugticket..." font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%" />
+
+			</panel>
+			<panel id="panelAlpha_mid" height="50%" width="100%" align="center" childLayout="vertical"
+			       backgroundColor="#0a0f">
+
+				<text id="outputHeader" text="Output" font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%"/>
+				<text id="outputBody" text=".." font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%"/>
+			</panel>
+			<panel id="panelAlpha_bottom" height="25%" width="100%" align="center" childLayout="center"
+			       backgroundColor="#000f">
+				<control id="consoleAlpha" name="nifty-console" lines="5" align="center" valign="center" />
+			</panel>
+		</layer>
+	</screen>
+
+</nifty>

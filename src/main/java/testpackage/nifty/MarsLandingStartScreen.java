@@ -16,13 +16,13 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import testpackage.AlphaMarsApplication;
+import testpackage.AlphaAlphaMarsApplication;
 
 public class MarsLandingStartScreen extends BaseAppState implements ScreenController {
 
     private Nifty nifty;
     private Screen screen;
-    private AlphaMarsApplication app;
+    private AlphaAlphaMarsApplication app;
     private AssetManager assetManager;
     private InputManager inputManager;
     private AudioRenderer audioRenderer;
@@ -31,7 +31,7 @@ public class MarsLandingStartScreen extends BaseAppState implements ScreenContro
 
     @Override
     public void initialize(Application app) {
-        this.app = (AlphaMarsApplication) app;
+        this.app = (AlphaAlphaMarsApplication) app;
         this.assetManager = app.getAssetManager();
         this.inputManager = app.getInputManager();
         this.audioRenderer= app.getAudioRenderer();
