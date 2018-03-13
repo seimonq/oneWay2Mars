@@ -15,8 +15,6 @@
 			</panel>
 			<panel id="panelAlpha_mid" height="50%" width="100%" align="center" childLayout="vertical"
 			       backgroundColor="#0a0f">
-
-				<text id="outputHeader" text="Output" font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%"/>
 				<text id="outputBody" text=".." font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%"/>
 			</panel>
 			<panel id="panelAlpha_bottom" height="25%" width="100%" align="center" childLayout="center"
