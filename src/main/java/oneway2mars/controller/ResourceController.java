@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 
 public class ResourceController {
 
-    private AlphaAlphaMarsApplication app;
+    private AlphaAlphaModel model;
 
-    public ResourceController(AlphaAlphaMarsApplication app) {
-        this.app = app;
+    public ResourceController(AlphaAlphaModel model) {
+        this.model = model;
     }
 
     public void updateResources(AlphaAlphaModel model) {
@@ -21,10 +21,10 @@ public class ResourceController {
     }
 
     private void processEngines(Engine engine) {
-        Resource consumedResource = app.getGameModel().getResources().stream().filter(res -> engine.getConsumerType().equals(res.getClass())).findFirst().get();
+        Resource consumedResource = model.getResources().stream().filter(res -> engine.getConsumerType().equals(res.getClass())).findFirst().get();
         consumedResource.setAmount(consumedResource.getAmount() + engine.getConsumationRate());
 
-        Resource producedResource = app.getGameModel().getResources().stream().filter(res -> engine.getProducerType().equals(res.getClass())).findFirst().get();
+        Resource producedResource = model.getResources().stream().filter(res -> engine.getProducerType().equals(res.getClass())).findFirst().get();
         producedResource.setAmount(producedResource.getAmount() + engine.getProductionRate());
     }
 }

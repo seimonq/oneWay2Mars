@@ -6,12 +6,13 @@ import oneway2mars.model.resource.Resource;
 
 public class InsectFarm extends AbstractEngine implements Engine {
 
-
-    public InsectFarm() {
+    public InsectFarm(String name, Float consumationRate, Float productionRate) {
         consumerType = FusionFuel.class;
         producerType = MealWorms.class;
-        consumationRate = -1f;
-        productionRate = 2f;
-        setActivated(true);
+        this.consumationRate = consumationRate;
+        this.productionRate = productionRate;
+        this.name = name;
+        setActive(true);
     }
+
 }

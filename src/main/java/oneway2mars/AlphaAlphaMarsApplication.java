@@ -1,7 +1,6 @@
 package oneway2mars;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -11,46 +10,40 @@ import com.jme3.scene.Geometry;
 import com.jme3.system.AppSettings;
 import oneway2mars.controller.GameController;
 import oneway2mars.controller.ResourceController;
+import oneway2mars.controller.ViewController;
 import oneway2mars.model.AlphaAlphaModel;
-import oneway2mars.states.AlphaAlphaScreenController;
-import oneway2mars.states.MarsLandingStartScreen;
+import oneway2mars.screen.MarsLandingStartScreen;
+import oneway2mars.states.AlphaAlphaState;
 import oneway2mars.states.ImageTestState;
+
+import java.util.Arrays;
 
 public class AlphaAlphaMarsApplication extends SimpleApplication {
 
     protected Geometry movingBox;
-    protected BaseAppState marsLandingGame;
-    protected BaseAppState imageMars;
-    protected BaseAppState alphaAlphaScreen;
-
 
     private AlphaAlphaModel gameModel;
     private ResourceController resourceController;
     private GameController gameController;
+    protected ViewController viewController;
+
+    public ViewController getViewController() {
+        return viewController;
+    }
 
     public AlphaAlphaModel getGameModel() {
         return gameModel;
-    }
-
-    public void setGameModel(AlphaAlphaModel gameModel) {
-        this.gameModel = gameModel;
     }
 
     public ResourceController getResourceController() {
         return resourceController;
     }
 
-    public void setResourceController(ResourceController resourceController) {
-        this.resourceController = resourceController;
-    }
 
     public GameController getGameController() {
         return gameController;
     }
 
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
 
     public static void main(String[] args) {
         AlphaAlphaMarsApplication app = new AlphaAlphaMarsApplication();
@@ -77,51 +70,26 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
     public void simpleInitApp() {
 
         doConfigurationAndBindung();
-        marsLandingGame = new MarsLandingStartScreen();
-        imageMars = new ImageTestState();
-        alphaAlphaScreen = new AlphaAlphaScreenController();
-
-        gameModel = new AlphaAlphaModel();
-
-        stateManager.attach(marsLandingGame);
-        stateManager.attach(imageMars);
-        stateManager.attach(alphaAlphaScreen);
-
-            //attach gui here
-        stateManager.getState(ImageTestState.class).setEnabled(true);
-        stateManager.getState(AlphaAlphaScreenController.class).setEnabled(true);
-
-        stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
-    }
-
-    /* Use the main event loop to trigger repeating actions. */
-    @Override
-    public void simpleUpdate(float tpf) {
-        //your updates here
+        initStates();
 
     }
-
-
 
     private final ActionListener actionListener = new ActionListener() {
         public void onAction(String name, boolean keyPressed, float tpf) {
-            if(name.equals("L") && !keyPressed) {
-                if(marsLandingGame.isEnabled()) {
-                    stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
-                    stateManager.getState(ImageTestState.class).setEnabled(true);
-                } else {
-                    stateManager.getState(MarsLandingStartScreen.class).setEnabled(true);
-                    stateManager.getState(ImageTestState.class).setEnabled(false);
-                }
+            if(name.equals("F1") && !keyPressed) {
+                stateManager.getState(AlphaAlphaState.class).setEnabled(true);
+                stateManager.getState(ImageTestState.class).setEnabled(false);
+                stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
             }
-            if(name.equals("A") && !keyPressed) {
-                if(marsLandingGame.isEnabled()) {
-                    stateManager.getState(AlphaAlphaScreenController.class).setEnabled(false);
-                    stateManager.getState(ImageTestState.class).setEnabled(true);
-                } else {
-                    stateManager.getState(AlphaAlphaScreenController.class).setEnabled(true);
-                    stateManager.getState(ImageTestState.class).setEnabled(false);
-                }
+            if(name.equals("F2") && !keyPressed) {
+                stateManager.getState(AlphaAlphaState.class).setEnabled(false);
+                stateManager.getState(ImageTestState.class).setEnabled(true);
+                stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
+            }
+            if(name.equals("F3") && !keyPressed) {
+                stateManager.getState(AlphaAlphaState.class).setEnabled(false);
+                stateManager.getState(ImageTestState.class).setEnabled(false);
+                stateManager.getState(MarsLandingStartScreen.class).setEnabled(true);
             }
         }
     };
@@ -134,21 +102,30 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
         assetManager.registerLocator(System.getProperty("user.dir") + "/src/rsc/pictures/", FileLocator.class);
         assetManager.registerLocator(System.getProperty("user.dir") + "/src/rsc/nifty/", FileLocator.class);
 
+        //add controller
+        this.gameModel = new AlphaAlphaModel();
+        this.resourceController = new ResourceController(this.getGameModel());
+        this.gameController = new GameController(this.getGameModel());
+        this.viewController = new ViewController(this.getGameModel());
+
         //binding keys
         inputManager.addMapping("Up", new KeyTrigger(KeyInput.KEY_UP));
         inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_DOWN));
         inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_LEFT));
         inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_RIGHT));
-        inputManager.addMapping( "L", new KeyTrigger(KeyInput.KEY_L));
-        inputManager.addMapping( "A", new KeyTrigger(KeyInput.KEY_A));
+        inputManager.addMapping( "F1", new KeyTrigger(KeyInput.KEY_F1));
+        inputManager.addMapping( "F2", new KeyTrigger(KeyInput.KEY_F2));
+        inputManager.addMapping( "F3", new KeyTrigger(KeyInput.KEY_F3));
 
         // inputManager.addListener(analogListener, new String[]{"Up", "Down", "Left", "Right"});
-        inputManager.addListener(actionListener, new String[] {"A","L"});
-
-
-        //add controller
-        this.resourceController = new ResourceController(this);
-        this.gameController = new GameController(this);
+        inputManager.addListener(actionListener, new String[] {"F1","F2","F3"});
+    }
+    private void initStates() {
+        stateManager.attachAll(Arrays.asList(new MarsLandingStartScreen(),new ImageTestState(),new AlphaAlphaState()));
+            //default
+        stateManager.getState(ImageTestState.class).setEnabled(true);
+        stateManager.getState(AlphaAlphaState.class).setEnabled(false);
+        stateManager.getState(MarsLandingStartScreen.class).setEnabled(false);
     }
 
     //not in use currently

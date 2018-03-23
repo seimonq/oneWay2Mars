@@ -4,6 +4,8 @@ import oneway2mars.model.resource.Resource;
 
 public abstract class AbstractEngine implements Engine {
 
+    protected String name = "engine";
+
     protected boolean activated;
 
     protected Class<? extends Resource> consumerType;
@@ -36,7 +38,8 @@ public abstract class AbstractEngine implements Engine {
         return activated;
     }
 
-    public void setActivated(boolean activated) {
+    @Override
+    public void setActive(boolean activated) {
         this.activated = activated;
     }
 
@@ -57,4 +60,11 @@ public abstract class AbstractEngine implements Engine {
     public void setProductionRate(Float productionRate) {
         this.productionRate = productionRate;
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+
 }

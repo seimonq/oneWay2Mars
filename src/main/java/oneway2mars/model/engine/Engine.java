@@ -4,6 +4,7 @@ import oneway2mars.model.resource.Resource;
 
 public interface Engine {
 
+
     Class<? extends Resource> getConsumerType();
 
     void setConsumerType(Class<? extends Resource> clazz);
@@ -18,5 +19,7 @@ public interface Engine {
 
     boolean isActivated();
 
+    void setActive(boolean active);
 
+    String getName();
 }

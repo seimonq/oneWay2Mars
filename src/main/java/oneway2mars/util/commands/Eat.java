@@ -1,4 +1,4 @@
-package oneway2mars.commands;
+package oneway2mars.util.commands;
 
 import de.lessvoid.nifty.controls.ConsoleCommands;
 import de.lessvoid.nifty.elements.Element;
@@ -15,7 +15,7 @@ public class Eat implements ConsoleCommands.ConsoleCommand{
     public Eat(AlphaAlphaModel model, Screen screen) {
         this.model = model;
         this.screen = screen;
-        this.outputField = screen.findElementById("outputBody");
+        this.outputField = screen.findElementById("outputEvent");
     }
 
     public void execute(final String[] args) {

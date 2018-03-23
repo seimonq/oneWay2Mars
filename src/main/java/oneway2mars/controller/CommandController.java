@@ -5,7 +5,8 @@ import de.lessvoid.nifty.controls.Console;
 import de.lessvoid.nifty.controls.ConsoleCommands;
 import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.commands.Eat;
+import oneway2mars.util.commands.ChangeEngineState;
+import oneway2mars.util.commands.Eat;
 
 public class CommandController {
 
@@ -18,6 +19,10 @@ public class CommandController {
         // and register the command as a command with the console
         ConsoleCommands.ConsoleCommand eat = new Eat(app.getGameModel(), screen);
         consoleCommands.registerCommand("eat", eat);
+
+        //switch engines on/off
+        ConsoleCommands.ConsoleCommand switchEngineState = new ChangeEngineState(app.getGameModel());
+        consoleCommands.registerCommand("engineactive", switchEngineState);
 
         consoleCommands.enableCommandCompletion(true);
     }
