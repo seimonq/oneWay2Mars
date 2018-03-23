@@ -1,4 +1,4 @@
-package testpackage;
+package oneway2mars;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
@@ -9,10 +9,12 @@ import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.scene.Geometry;
 import com.jme3.system.AppSettings;
-import testpackage.model.AlphaAlphaModel;
-import testpackage.nifty.AlphaAlphaScreenController;
-import testpackage.nifty.MarsLandingStartScreen;
-import testpackage.states.ImageTestState;
+import oneway2mars.controller.GameController;
+import oneway2mars.controller.ResourceController;
+import oneway2mars.model.AlphaAlphaModel;
+import oneway2mars.states.AlphaAlphaScreenController;
+import oneway2mars.states.MarsLandingStartScreen;
+import oneway2mars.states.ImageTestState;
 
 public class AlphaAlphaMarsApplication extends SimpleApplication {
 
@@ -23,6 +25,8 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
 
     private AlphaAlphaModel gameModel;
+    private ResourceController resourceController;
+    private GameController gameController;
 
     public AlphaAlphaModel getGameModel() {
         return gameModel;
@@ -30,6 +34,22 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
     public void setGameModel(AlphaAlphaModel gameModel) {
         this.gameModel = gameModel;
+    }
+
+    public ResourceController getResourceController() {
+        return resourceController;
+    }
+
+    public void setResourceController(ResourceController resourceController) {
+        this.resourceController = resourceController;
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
     }
 
     public static void main(String[] args) {
@@ -55,12 +75,14 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+
         doConfigurationAndBindung();
         marsLandingGame = new MarsLandingStartScreen();
         imageMars = new ImageTestState();
         alphaAlphaScreen = new AlphaAlphaScreenController();
 
-        gameModel = new AlphaAlphaModel(100);
+        gameModel = new AlphaAlphaModel();
+
         stateManager.attach(marsLandingGame);
         stateManager.attach(imageMars);
         stateManager.attach(alphaAlphaScreen);
@@ -76,6 +98,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
     @Override
     public void simpleUpdate(float tpf) {
         //your updates here
+
     }
 
 
@@ -122,6 +145,10 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
         // inputManager.addListener(analogListener, new String[]{"Up", "Down", "Left", "Right"});
         inputManager.addListener(actionListener, new String[] {"A","L"});
 
+
+        //add controller
+        this.resourceController = new ResourceController(this);
+        this.gameController = new GameController(this);
     }
 
     //not in use currently

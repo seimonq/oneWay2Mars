@@ -3,7 +3,7 @@
           xsi:schemaLocation="http://nifty-gui.lessvoid.com/nifty-gui http://nifty-gui.lessvoid.com/nifty-gui">
 	<useStyles filename="nifty-default-styles.xml" />
 	<useControls filename="nifty-default-controls.xml" />
-	<screen id="start" controller="testpackage.nifty.MarsLandingStartScreen">
+	<screen id="start" controller="oneway2mars.states.MarsLandingStartScreen">
 		<layer childLayout="vertical" >
 			<panel id="panel_top" height="25%" width="100%" align="center" childLayout="vertical"
 			       backgroundColor="#f00f">

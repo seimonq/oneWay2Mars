@@ -1,4 +1,4 @@
-package testpackage.states;
+package oneway2mars.states;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
@@ -10,7 +10,7 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
-import testpackage.AlphaAlphaMarsApplication;
+import oneway2mars.AlphaAlphaMarsApplication;
 
 public class ImageTestState extends BaseAppState {
 

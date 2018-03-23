@@ -1,5 +1,5 @@
 
-package testpackage.nifty;
+package oneway2mars.states;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
@@ -16,7 +16,7 @@ import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import testpackage.AlphaAlphaMarsApplication;
+import oneway2mars.AlphaAlphaMarsApplication;
 
 public class MarsLandingStartScreen extends BaseAppState implements ScreenController {
 
