@@ -22,4 +22,9 @@ public interface Engine {
     void setActive(boolean active);
 
     String getName();
-}
+
+    void setCondition(Float condition);
+
+    Float getCondition();
+
+    }

@@ -7,11 +7,20 @@ public abstract class AbstractEngine implements Engine {
     protected String name = "engine";
 
     protected boolean activated;
+    protected Float condition;
 
     protected Class<? extends Resource> consumerType;
     protected Float consumationRate;
     protected Class<? extends Resource> producerType;
     protected Float productionRate;
+
+    public AbstractEngine(String name, Float consumationRate, Float productionRate) {
+        this.consumationRate = consumationRate;
+        this.productionRate = productionRate;
+        this.name = name;
+        this.consumationRate = 1.0f;
+        this.activated = true;
+    }
 
     @Override
     public Class<? extends Resource> getConsumerType() {
@@ -66,5 +75,13 @@ public abstract class AbstractEngine implements Engine {
         return name;
     }
 
+    @Override
+    public Float getCondition() {
+        return condition;
+    }
+    @Override
+    public void setCondition(Float condition) {
+        this.condition = condition;
+    }
 
 }

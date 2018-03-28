@@ -3,6 +3,7 @@ package oneway2mars.model.resource;
 public class AbstractResource {
 
     private Float amount;
+    protected boolean accumulable;
 
     public Float getAmount() {
         return amount;
@@ -12,5 +13,11 @@ public class AbstractResource {
         this.amount = amount;
     }
 
+    public boolean isAccumulable() {
+        return accumulable;
+    }
 
+    public void setAccumulable(boolean accumulable) {
+        this.accumulable = accumulable;
+    }
 }

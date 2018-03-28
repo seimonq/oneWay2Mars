@@ -25,6 +25,12 @@ public class ResourceController {
         consumedResource.setAmount(consumedResource.getAmount() + engine.getConsumationRate());
 
         Resource producedResource = model.getResources().stream().filter(res -> engine.getProducerType().equals(res.getClass())).findFirst().get();
-        producedResource.setAmount(producedResource.getAmount() + engine.getProductionRate());
+
+        if (producedResource.isAccumulable()) {
+            producedResource.setAmount(producedResource.getAmount() + engine.getProductionRate());
+        } else {
+            producedResource.setAmount(engine.getProductionRate());
+        }
+
     }
 }
