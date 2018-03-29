@@ -6,8 +6,4 @@ public interface Resource {
 
     void setAmount(Float amount);
 
-    boolean isAccumulable();
-
-    void setAccumulable(boolean accumulable);
-
 }

@@ -11,17 +11,23 @@ public interface Engine {
 
     Float getConsumationRate();
 
+    void setConsumationRate(Float productionRate);
+
     Class<? extends Resource> getProducerType();
 
     void setProducerType(Class<? extends Resource> clazz);
 
     Float getProductionRate();
 
+    void setProductionRate(Float productionRate);
+
     boolean isActivated();
 
     void setActive(boolean active);
 
     String getName();
+
+    void setName(String name);
 
     void setCondition(Float condition);
 

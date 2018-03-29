@@ -1,23 +1,17 @@
 package oneway2mars.model.resource;
 
-public class AbstractResource {
+public class AbstractResource implements Resource{
 
     private Float amount;
-    protected boolean accumulable;
 
+    @Override
     public Float getAmount() {
         return amount;
     }
 
+    @Override
     public void setAmount(Float amount) {
         this.amount = amount;
     }
 
-    public boolean isAccumulable() {
-        return accumulable;
-    }
-
-    public void setAccumulable(boolean accumulable) {
-        this.accumulable = accumulable;
-    }
 }

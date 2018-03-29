@@ -1,11 +1,9 @@
 package oneway2mars.controller;
 
 import oneway2mars.model.AlphaAlphaModel;
-import oneway2mars.model.engine.AirConditioner;
 import oneway2mars.model.engine.Engine;
-import oneway2mars.model.engine.InsectFarm;
-import oneway2mars.model.resource.Energy;
-import oneway2mars.model.resource.Food;
+import oneway2mars.model.engine.type.*;
+import oneway2mars.model.resource.type.*;
 import oneway2mars.model.resource.Resource;
 import oneway2mars.util.commands.constants.InitialGameConstants;
 
@@ -20,16 +18,11 @@ public class GameController {
 
     public void initGame() {
 
-        Resource worms = new Food();
-        worms.setAmount(50f);
-        Resource fuel = new Energy();
-        fuel.setAmount(200f);
-        model.setResources(Arrays.asList(fuel, worms));
+        model.setResources(Arrays.asList(new Energy(), new Food(), new Ore(), new Oxigen(), new
+                Temperature(), new Water()));
 
-      //  Engine airCondition = new AirConditioner("airCondition", InitialGameConstants.AIR_CONDITIONER_CONS_RATE, InitialGameConstants.AIR_CONDITIONER_PROD_RATE);
-        Engine insectFarm = new InsectFarm("insectfarm", InitialGameConstants.INSECT_FARM_CONS_RATE, InitialGameConstants.INSECT_FARM_PROD_RATE);
-      //  Engine
-        model.setEngines(Arrays.asList(insectFarm));
+        model.setEngines(Arrays.asList(new AirConditioner(), new InsectFarm(), new NuclearReactor
+                (), new OxigenGenerator(), new Rover(), new WaterTreatment()));
 
     }
 }

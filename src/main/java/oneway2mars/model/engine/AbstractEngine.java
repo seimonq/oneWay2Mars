@@ -4,84 +4,85 @@ import oneway2mars.model.resource.Resource;
 
 public abstract class AbstractEngine implements Engine {
 
-    protected String name = "engine";
+	private String name = "engine";
 
-    protected boolean activated;
-    protected Float condition;
+	private boolean activated;
+	private Float condition;
 
-    protected Class<? extends Resource> consumerType;
-    protected Float consumationRate;
-    protected Class<? extends Resource> producerType;
-    protected Float productionRate;
+	private Class<? extends Resource> consumerType;
+	private Float consumationRate;
 
-    public AbstractEngine(String name, Float consumationRate, Float productionRate) {
-        this.consumationRate = consumationRate;
-        this.productionRate = productionRate;
-        this.name = name;
-        this.consumationRate = 1.0f;
-        this.activated = true;
-    }
+	private Class<? extends Resource> producerType;
+	private Float productionRate;
 
-    @Override
-    public Class<? extends Resource> getConsumerType() {
-        return consumerType;
-    }
+	@Override
+	public Class<? extends Resource> getConsumerType() {
+		return consumerType;
+	}
 
-    @Override
-    public void setConsumerType(Class<? extends Resource> consumerType) {
-        this.consumerType = consumerType;
-    }
+	@Override
+	public void setConsumerType(Class<? extends Resource> consumerType) {
+		this.consumerType = consumerType;
+	}
 
-    @Override
-    public Class<? extends Resource> getProducerType() {
-        return producerType;
-    }
+	@Override
+	public Class<? extends Resource> getProducerType() {
+		return producerType;
+	}
 
-    @Override
-    public void setProducerType(Class<? extends Resource> producerType) {
-        this.producerType = producerType;
-    }
+	@Override
+	public void setProducerType(Class<? extends Resource> producerType) {
+		this.producerType = producerType;
+	}
 
-    @Override
-    public boolean isActivated() {
-        return activated;
-    }
+	@Override
+	public boolean isActivated() {
+		return activated;
+	}
 
-    @Override
-    public void setActive(boolean activated) {
-        this.activated = activated;
-    }
+	@Override
+	public void setActive(boolean activated) {
+		this.activated = activated;
+	}
 
-    @Override
-    public Float getConsumationRate() {
-        return consumationRate;
-    }
+	@Override
+	public Float getConsumationRate() {
+		return consumationRate;
+	}
 
-    public void setConsumationRate(Float consumationRate) {
-        this.consumationRate = consumationRate;
-    }
+	@Override
+	public void setConsumationRate(Float consumationRate) {
+		this.consumationRate = consumationRate;
+	}
 
-    @Override
-    public Float getProductionRate() {
-        return productionRate;
-    }
+	@Override
+	public Float getProductionRate() {
+		return productionRate;
+	}
 
-    public void setProductionRate(Float productionRate) {
-        this.productionRate = productionRate;
-    }
+	@Override
+	public void setProductionRate(Float productionRate) {
+		this.productionRate = productionRate;
+	}
 
-    @Override
-    public String getName() {
-        return name;
-    }
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public Float getCondition() {
-        return condition;
-    }
-    @Override
-    public void setCondition(Float condition) {
-        this.condition = condition;
-    }
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public Float getCondition() {
+		return condition;
+	}
+
+	@Override
+	public void setCondition(Float condition) {
+		this.condition = condition;
+	}
 
 }

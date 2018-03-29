@@ -4,6 +4,9 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import oneway2mars.model.AlphaAlphaModel;
+import oneway2mars.model.engine.Engine;
+import oneway2mars.model.resource.NonAccumulableResource;
+import oneway2mars.model.resource.Resource;
 
 public class ViewController {
 
@@ -16,16 +19,28 @@ public class ViewController {
     public void updateView(Nifty nifty) {
 
         Element outputEngine = nifty.getCurrentScreen().findElementById("outputEngine");
-        String engineName = model.getEngines().get(0).getName();
-        String engineState = model.getEngines().get(0).isActivated() ? "active" : "not active";
 
-        outputEngine.getRenderer(TextRenderer.class).setText("Engine "+engineName+" :"+engineState);
+        String outputEngines = "";
 
-        String consumingRes = model.getEngines().get(0).getConsumerType().getSimpleName();
-        String producingRes = model.getEngines().get(0).getProducerType().getSimpleName();
+        for(Engine eng : model.getEngines()) {
+            outputEngines += eng.getName() + ": " +
+                    (eng.isActivated()?" activ \n":" not activ \n");
+        }
+
+        outputEngine.getRenderer(TextRenderer.class).setText(outputEngines);
+
 
         Element outputResource = nifty.getCurrentScreen().findElementById("outputResource");
-        outputResource.getRenderer(TextRenderer.class).setText(consumingRes + ": " + model.getResources().get(0)
-                .getAmount().toString() + ", " + producingRes + ": " + model.getResources().get(1).getAmount().toString());
+
+        String outputResources = "";
+        for(Resource res : model.getResources()) {
+            outputResources += res.getClass()
+                    .getSimpleName
+                            () + ": " + res.getAmount() + (res.getClass().isAssignableFrom
+                    (NonAccumulableResource.class)? " / " + ((NonAccumulableResource) res)
+                    .getUnusedAmount() + "\n" : "\n");
+        }
+
+        outputResource.getRenderer(TextRenderer.class).setText(outputResources);
     }
 }
