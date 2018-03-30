@@ -14,10 +14,10 @@
 
 			</panel>
 			<panel id="panelAlpha_mid" height="50%" width="100%" align="center" childLayout="vertical"
-			       backgroundColor="#0a0f">
-				<text id="outputEngine" text="No engines yet " font="Interface/Fonts/Default.fnt" color="#a00f" wrap="true" width="60%"/>
-				<text id="outputResource" text="No resources yet" font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%"/>
-				<text id="outputEvent" text="No events yet" font="Interface/Fonts/Default.fnt" color="#00af" wrap="true" width="60%"/>
+			       backgroundColor="#0a0f" >
+				<text id="outputEngine"  text="No engines yet " font="Interface/Fonts/Default.fnt" color="#a00f" wrap="true" width="60%" textHAlign="left"/>
+				<text id="outputResource" text="No resources yet" font="Interface/Fonts/Default.fnt" color="#000f" wrap="true" width="60%" textHAlign="left"/>
+				<text id="outputEvent" text="No events yet" font="Interface/Fonts/Default.fnt" color="#00af" wrap="true" width="60%" textHAlign="left"/>
 			</panel>
 			<panel id="panelAlpha_bottom" height="25%" width="100%" align="center" childLayout="center"
 			       backgroundColor="#000f">

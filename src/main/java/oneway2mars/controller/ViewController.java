@@ -24,7 +24,8 @@ public class ViewController {
 
         for(Engine eng : model.getEngines()) {
             outputEngines += eng.getName() + ": " +
-                    (eng.isActivated()?" activ \n":" not activ \n");
+                    (eng.isActivated()?" activ ":" not activ ") + ", Condition: " + eng
+                            .getCondition() + "\n";
         }
 
         outputEngine.getRenderer(TextRenderer.class).setText(outputEngines);
@@ -36,8 +37,8 @@ public class ViewController {
         for(Resource res : model.getResources()) {
             outputResources += res.getClass()
                     .getSimpleName
-                            () + ": " + res.getAmount() + (res.getClass().isAssignableFrom
-                    (NonAccumulableResource.class)? " / " + ((NonAccumulableResource) res)
+                            () + ": " + res.getAmount() + (NonAccumulableResource.class.isAssignableFrom(res
+                    .getClass())? " / " + ((NonAccumulableResource) res)
                     .getUnusedAmount() + "\n" : "\n");
         }
 
