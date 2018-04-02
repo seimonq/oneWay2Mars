@@ -1,4 +1,4 @@
-package oneway2mars.util.commands.constants;
+package oneway2mars.util.constants;
 
 public final class InitialGameConstants {
 

@@ -4,7 +4,7 @@ import oneway2mars.model.engine.AbstractEngine;
 import oneway2mars.model.engine.Engine;
 import oneway2mars.model.resource.type.Energy;
 import oneway2mars.model.resource.type.Oxigen;
-import oneway2mars.util.commands.constants.InitialGameConstants;
+import oneway2mars.util.constants.InitialGameConstants;
 
 public class OxigenGenerator extends AbstractEngine implements Engine {
 

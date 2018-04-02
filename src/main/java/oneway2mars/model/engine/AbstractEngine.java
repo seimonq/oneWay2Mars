@@ -2,38 +2,19 @@ package oneway2mars.model.engine;
 
 import oneway2mars.model.resource.Resource;
 
+import java.util.Map;
+
 public abstract class AbstractEngine implements Engine {
 
-	private String name = "engine";
-
+	private String name;
 	private boolean activated;
 	private Float condition;
+	private Float resourceSaturation;
+	private Float efficiency;
 
-	private Class<? extends Resource> consumerType;
-	private Float consumationRate;
+	private Map<Class<? extends Resource>, Float> consumerMap;
+	private Map<Class<? extends Resource>, Float> producerMap;
 
-	private Class<? extends Resource> producerType;
-	private Float productionRate;
-
-	@Override
-	public Class<? extends Resource> getConsumerType() {
-		return consumerType;
-	}
-
-	@Override
-	public void setConsumerType(Class<? extends Resource> consumerType) {
-		this.consumerType = consumerType;
-	}
-
-	@Override
-	public Class<? extends Resource> getProducerType() {
-		return producerType;
-	}
-
-	@Override
-	public void setProducerType(Class<? extends Resource> producerType) {
-		this.producerType = producerType;
-	}
 
 	@Override
 	public boolean isActivated() {
@@ -45,25 +26,6 @@ public abstract class AbstractEngine implements Engine {
 		this.activated = activated;
 	}
 
-	@Override
-	public Float getConsumationRate() {
-		return consumationRate;
-	}
-
-	@Override
-	public void setConsumationRate(Float consumationRate) {
-		this.consumationRate = consumationRate;
-	}
-
-	@Override
-	public Float getProductionRate() {
-		return productionRate;
-	}
-
-	@Override
-	public void setProductionRate(Float productionRate) {
-		this.productionRate = productionRate;
-	}
 
 	@Override
 	public String getName() {
@@ -85,4 +47,64 @@ public abstract class AbstractEngine implements Engine {
 		this.condition = condition;
 	}
 
+	@Override
+	public Map<Class<? extends Resource>, Float> getConsumerMap() {
+		return consumerMap;
+	}
+
+	@Override
+	public void setConsumerMap(Map<Class<? extends Resource>, Float> consumerMap) {
+		this.consumerMap = consumerMap;
+	}
+
+	@Override
+	public Map<Class<? extends Resource>, Float> getProducerMap() {
+		return producerMap;
+	}
+
+	@Override
+	public void setProducerMap(Map<Class<? extends Resource>, Float> producerMap) {
+		this.producerMap = producerMap;
+	}
+
+	@Override
+	public Float getEfficiency() {
+		return efficiency;
+	}
+
+	@Override
+	public void setEfficiency(Float efficiency) {
+		this.efficiency = efficiency;
+	}
+
+	@Override
+	public Float getResourceSaturation() {
+		return this.resourceSaturation;
+	}
+
+	@Override
+	public void setResourceSaturation(Float resourceSaturation) {
+		this.resourceSaturation = resourceSaturation;
+	}
+
+	@Override
+	public Float consumeResource(Class<? extends Resource> resource) {
+		//not used yet
+		return null;
+	}
+
+	@Override
+	public Float produceResource(Class<? extends Resource> resource) {
+		return producerMap.get(resource) * getEfficiency();
+	}
+
+	@Override
+	public void shiftToNextRound() {
+		resourceSaturation = 1.0f;
+	}
+
+	@Override
+	public void calcEfficiency() {
+		efficiency = condition * resourceSaturation;
+	}
 }

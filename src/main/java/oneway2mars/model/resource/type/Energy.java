@@ -2,7 +2,7 @@ package oneway2mars.model.resource.type;
 
 import oneway2mars.model.resource.AbstractNonAccumulableResource;
 import oneway2mars.model.resource.NonAccumulableResource;
-import oneway2mars.util.commands.constants.InitialGameConstants;
+import oneway2mars.util.constants.InitialGameConstants;
 
 public class Energy extends AbstractNonAccumulableResource implements NonAccumulableResource {
 

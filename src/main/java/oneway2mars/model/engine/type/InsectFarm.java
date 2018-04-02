@@ -4,8 +4,7 @@ import oneway2mars.model.engine.AbstractEngine;
 import oneway2mars.model.engine.Engine;
 import oneway2mars.model.resource.type.Food;
 import oneway2mars.model.resource.type.Water;
-import oneway2mars.util.commands.constants.InitialGameConstants;
-import org.omg.PortableInterceptor.INACTIVE;
+import oneway2mars.util.constants.InitialGameConstants;
 
 public class InsectFarm extends AbstractEngine implements Engine {
 

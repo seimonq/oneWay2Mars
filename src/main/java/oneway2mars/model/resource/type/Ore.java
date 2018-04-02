@@ -2,7 +2,7 @@ package oneway2mars.model.resource.type;
 
 import oneway2mars.model.resource.AbstractAccumulableResource;
 import oneway2mars.model.resource.AccumulableResource;
-import oneway2mars.util.commands.constants.InitialGameConstants;
+import oneway2mars.util.constants.InitialGameConstants;
 
 public class Ore extends AbstractAccumulableResource implements AccumulableResource {
 

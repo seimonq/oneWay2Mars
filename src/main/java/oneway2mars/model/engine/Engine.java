@@ -2,35 +2,92 @@ package oneway2mars.model.engine;
 
 import oneway2mars.model.resource.Resource;
 
+import java.util.List;
+import java.util.Map;
+
 public interface Engine {
 
+	/**
+	 * @return base constants for consumed resources
+	 */
+	Map<Class<? extends Resource>, Float> getConsumerMap();
 
-    Class<? extends Resource> getConsumerType();
+	void setConsumerMap(Map<Class<? extends Resource>, Float> consumerMap);
 
-    void setConsumerType(Class<? extends Resource> clazz);
+	/**
+	 * @return base constants for produced resources
+	 */
+	Map<Class<? extends Resource>, Float> getProducerMap();
 
-    Float getConsumationRate();
+	void setProducerMap(Map<Class<? extends Resource>, Float> producerMap);
 
-    void setConsumationRate(Float productionRate);
+	/**
+	 * @return switched off or on status
+	 */
+	boolean isActivated();
 
-    Class<? extends Resource> getProducerType();
+	void setActive(boolean active);
 
-    void setProducerType(Class<? extends Resource> clazz);
+	/**
+	 * @return frontend name of engine
+	 */
+	String getName();
 
-    Float getProductionRate();
+	void setName(String name);
 
-    void setProductionRate(Float productionRate);
+	/**
+	 * @return condition factor between 0..1 of engine
+	 */
+	Float getCondition();
 
-    boolean isActivated();
+	void setCondition(Float condition);
 
-    void setActive(boolean active);
 
-    String getName();
+	/**
+	 * @return efficiency factor between 0..1 which will be multiplied with production rate
+	 */
+	Float getEfficiency();
 
-    void setName(String name);
+	void setEfficiency(Float efficiency);
 
-    void setCondition(Float condition);
 
-    Float getCondition();
+	/**
+	 * @return factor between 0..1 how much of needed consumed resources are available
+	 */
+	Float getResourceSaturation();
 
-    }
+	void setResourceSaturation(Float resourceSaturation);
+
+	/**
+	 * consumes resource and updates amount
+	 *
+	 * @param resource consumed resource
+	 * return {@Float} amount consumed
+	 */
+	Float consumeResource(Class<? extends Resource> resource);
+
+	/**
+	 * produces resource and updates amount
+	 *
+	 * @param resource produced resource
+	 * return {@Float} amount produced
+	 */
+	Float produceResource(Class<? extends Resource> resource);
+
+	/**
+	 * used to multiply saturations over whole resource map
+	 *
+	 * @param resourceSaturation of specific resource
+	 */
+	void multiplyResourceSaturation(Float resourceSaturation);
+
+	/**
+	 * reset round specific values
+	 */
+	void shiftToNextRound();
+
+	/**
+	 * sets efficiency for producing resources this round
+	 */
+	void calcEfficiency();
+}
