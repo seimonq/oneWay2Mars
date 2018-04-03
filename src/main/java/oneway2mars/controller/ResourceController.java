@@ -21,15 +21,19 @@ public class ResourceController {
 	}
 
 	public void updateResources(AlphaAlphaModel model) {
+
+		List<Engine> workingEngines = model.getEngines().stream().filter( eng -> eng.isActivated
+				()).collect(Collectors.toList());
+		
 		model.getEngines().forEach(eng -> eng.shiftToNextRound());
 
 		model.getResources().forEach( res -> {
 			res.shiftToNextRound();
-			res.calcConsumedNow(model.getEngines());
+			res.calcConsumedNow(workingEngines);
 		});
 
-		model.getEngines().forEach(eng -> eng.calcEfficiency());
-		model.getResources().forEach( res -> res.calcProducedNow(model.getEngines()));
+		workingEngines.forEach(eng -> eng.calcEfficiency());
+		model.getResources().forEach( res -> res.calcProducedNow(workingEngines));
 
 
 		//old

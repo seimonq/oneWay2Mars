@@ -10,12 +10,12 @@ public class AirConditioner extends AbstractEngine implements Engine {
 
 	public AirConditioner() {
 
-		setName("airconditioner");
-		setCondition(InitialGameConstants.DEFAULT_CONDITION);
-		setConsumerType(Energy.class);
-		setProducerType(Temperature.class);
-		setConsumationRate(InitialGameConstants.AIR_CONDITIONER_CONS_RATE);
-		setProductionRate(InitialGameConstants.AIR_CONDITIONER_PROD_RATE);
+//		setName("airconditioner");
+//		setCondition(InitialGameConstants.DEFAULT_CONDITION);
+//		setConsumerType(Energy.class);
+//		setProducerType(Temperature.class);
+//		setConsumationRate(InitialGameConstants.AIR_CONDITIONER_CONS_RATE);
+//		setProductionRate(InitialGameConstants.AIR_CONDITIONER_PROD_RATE);
 		setActive(false);
 
 	}

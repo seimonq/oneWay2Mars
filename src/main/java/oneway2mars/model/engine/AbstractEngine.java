@@ -107,4 +107,10 @@ public abstract class AbstractEngine implements Engine {
 	public void calcEfficiency() {
 		efficiency = condition * resourceSaturation;
 	}
+
+	@Override
+	public void multiplyResourceSaturation(Float resourceSaturation) {
+		this.resourceSaturation *= resourceSaturation;
+	}
+
 }

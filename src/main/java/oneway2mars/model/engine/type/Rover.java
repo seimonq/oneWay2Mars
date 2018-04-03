@@ -10,12 +10,12 @@ public class Rover extends AbstractEngine implements Engine {
 
 	public Rover() {
 
-		setName("rover");
-		setCondition(InitialGameConstants.DEFAULT_CONDITION);
-		setConsumerType(Energy.class);
-		setProducerType(Ore.class);
-		setConsumationRate(InitialGameConstants.ROVER_CONS_RATE);
-		setProductionRate(InitialGameConstants.ROVER_PROD_RATE);
+//		setName("rover");
+//		setCondition(InitialGameConstants.DEFAULT_CONDITION);
+//		setConsumerType(Energy.class);
+//		setProducerType(Ore.class);
+//		setConsumationRate(InitialGameConstants.ROVER_CONS_RATE);
+//		setProductionRate(InitialGameConstants.ROVER_PROD_RATE);
 		setActive(false);
 
 	}
