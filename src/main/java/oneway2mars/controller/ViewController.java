@@ -38,8 +38,7 @@ public class ViewController {
             outputResources += res.getClass()
                     .getSimpleName
                             () + ": " + res.getAmount() + (NonAccumulableResource.class.isAssignableFrom(res
-                    .getClass())? " / " + ((NonAccumulableResource) res)
-                    .getUnusedAmount() + "\n" : "\n");
+                    .getClass())? " / " + res.getConsumedNow() + "\n" : "\n");
         }
 
         outputResource.getRenderer(TextRenderer.class).setText(outputResources);

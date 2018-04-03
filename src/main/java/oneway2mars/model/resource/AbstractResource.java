@@ -113,11 +113,11 @@ public class AbstractResource implements Resource {
 
 	@Override
 	public void calcAmountAfterRound() {
-		if(this.getClass().isInstance(AccumulableResource.class)) {
+		if(this instanceof AccumulableResource) {
 			amount -= consumedNow;
 			amount += producedNow;
 		}
-		else if(this.getClass().isInstance(NonAccumulableResource.class)) {
+		else if(this instanceof NonAccumulableResource) {
 			amount = producedNow;
 		}
 	}

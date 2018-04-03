@@ -24,7 +24,7 @@ public class ResourceController {
 
 		List<Engine> workingEngines = model.getEngines().stream().filter( eng -> eng.isActivated
 				()).collect(Collectors.toList());
-		
+
 		model.getEngines().forEach(eng -> eng.shiftToNextRound());
 
 		model.getResources().forEach( res -> {
@@ -33,8 +33,11 @@ public class ResourceController {
 		});
 
 		workingEngines.forEach(eng -> eng.calcEfficiency());
-		model.getResources().forEach( res -> res.calcProducedNow(workingEngines));
 
+		model.getResources().forEach( res -> {
+			res.calcProducedNow(workingEngines);
+			res.calcAmountAfterRound();
+		});
 
 		//old
 //		model.getEngines().stream().filter(engine -> engine.isActivated()).forEach(engine ->

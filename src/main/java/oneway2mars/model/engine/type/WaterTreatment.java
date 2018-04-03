@@ -10,7 +10,7 @@ public class WaterTreatment extends AbstractEngine implements Engine {
 
 	public WaterTreatment() {
 
-//		setName("watertreatment");
+		setName("watertreatment");
 //		setCondition(InitialGameConstants.DEFAULT_CONDITION);
 //		setConsumerType(Energy.class);
 //		setProducerType(Water.class);

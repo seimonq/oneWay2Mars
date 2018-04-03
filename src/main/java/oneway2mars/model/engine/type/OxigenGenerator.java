@@ -10,7 +10,7 @@ public class OxigenGenerator extends AbstractEngine implements Engine {
 
 	public OxigenGenerator() {
 
-//		setName("oxigengenerator");
+		setName("oxigengenerator");
 //		setCondition(InitialGameConstants.DEFAULT_CONDITION);
 //		setConsumerType(Energy.class);
 //		setProducerType(Oxigen.class);

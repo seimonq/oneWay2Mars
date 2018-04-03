@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class AlphaAlphaState extends BaseAppState{
 
-    private static final Integer PULSE = 2500;
+    private static final Integer PULSE = 1500;
     private Nifty nifty;
     private Screen screen;
     private AlphaAlphaMarsApplication app;
