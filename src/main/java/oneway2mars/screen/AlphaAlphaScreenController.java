@@ -6,14 +6,14 @@ import de.lessvoid.nifty.controls.Console;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.controller.CommandController;
+import oneway2mars.controller.UcCommand;
 
 public class AlphaAlphaScreenController implements ScreenController {
 
     private Nifty nifty;
     private Screen screen;
     private AlphaAlphaMarsApplication app;
-    private CommandController commandController;
+    private UcCommand ucCommand;
 
         //pass a
     public AlphaAlphaScreenController(Application app) {
@@ -24,7 +24,7 @@ public class AlphaAlphaScreenController implements ScreenController {
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
-        this.commandController = new CommandController();
+        this.ucCommand = new UcCommand();
 
     }
 
@@ -33,7 +33,7 @@ public class AlphaAlphaScreenController implements ScreenController {
         Console console = screen.findNiftyControl("consoleAlpha", Console.class);
 
         console.output("Hello :)");
-        commandController.registerCommands(nifty, console, screen, app);
+        ucCommand.registerCommands(nifty, console, screen, app);
     }
 
     public void onEndScreen() {

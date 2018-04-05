@@ -4,14 +4,10 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.controller.CommandController;
+import oneway2mars.controller.UcCommand;
 import oneway2mars.screen.AlphaAlphaScreenController;
-
-import java.awt.*;
 
 public class AlphaAlphaState extends BaseAppState{
 
@@ -21,7 +17,7 @@ public class AlphaAlphaState extends BaseAppState{
     private AlphaAlphaMarsApplication app;
     private NiftyJmeDisplay niftyDisplay;
     private Integer heartBeat;
-    private CommandController commandController;
+    private UcCommand ucCommand;
 
     /**
      * this method is executed after the state is initialized from simpleInitApp()
@@ -52,7 +48,7 @@ public class AlphaAlphaState extends BaseAppState{
         }
 
         if (heartBeat % PULSE == 0) {
-            app.getResourceController().updateResources(app.getGameModel());
+            app.getUcResource().updateResources(app.getGameModel());
             app.getViewController().updateView(nifty);
         }
     }

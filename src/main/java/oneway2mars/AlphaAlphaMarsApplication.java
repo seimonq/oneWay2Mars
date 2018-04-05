@@ -9,7 +9,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.scene.Geometry;
 import com.jme3.system.AppSettings;
 import oneway2mars.controller.GameController;
-import oneway2mars.controller.ResourceController;
+import oneway2mars.controller.UcResource;
 import oneway2mars.controller.ViewController;
 import oneway2mars.model.AlphaAlphaModel;
 import oneway2mars.screen.MarsLandingStartScreen;
@@ -23,7 +23,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
     protected Geometry movingBox;
 
     private AlphaAlphaModel gameModel;
-    private ResourceController resourceController;
+    private UcResource ucResource;
     private GameController gameController;
     protected ViewController viewController;
 
@@ -35,8 +35,8 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
         return gameModel;
     }
 
-    public ResourceController getResourceController() {
-        return resourceController;
+    public UcResource getUcResource() {
+        return ucResource;
     }
 
 
@@ -104,7 +104,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
         //add controller
         this.gameModel = new AlphaAlphaModel();
-        this.resourceController = new ResourceController(this.getGameModel());
+        this.ucResource = new UcResource(this.getGameModel());
         this.gameController = new GameController(this.getGameModel());
         this.viewController = new ViewController(this.getGameModel());
 

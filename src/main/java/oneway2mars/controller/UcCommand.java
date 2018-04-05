@@ -8,7 +8,7 @@ import oneway2mars.AlphaAlphaMarsApplication;
 import oneway2mars.util.commands.ChangeEngineState;
 import oneway2mars.util.commands.Eat;
 
-public class CommandController {
+public class UcCommand {
 
     public void registerCommands(Nifty nifty, Console console, Screen screen, AlphaAlphaMarsApplication app) {
 
