@@ -1,4 +1,10 @@
 package oneway2mars.model.need.type;
 
-public class Hunger {
+import oneway2mars.model.need.AbstractNeed;
+
+public class Hunger extends AbstractNeed {
+
+	public Hunger() {
+
+	}
 }

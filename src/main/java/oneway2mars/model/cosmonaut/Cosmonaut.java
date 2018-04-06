@@ -1,38 +1,37 @@
 package oneway2mars.model.cosmonaut;
 
+import oneway2mars.model.health.Health;
 import oneway2mars.model.need.Need;
 
-import java.util.Map;
 import java.util.Set;
 
 public interface Cosmonaut {
 
 	/**
-	 * physical condition between 0..1
+	 * Set of {@link Health} types
+	 *
 	 * @return
 	 */
-	Float getPhysicalHealth();
-	void setPhysicalHealth(Float physicalHealth);
+	Set<Health> getHealthSet();
+
+	void setHealthSet(Set<Health> healthSet);
 
 	/**
-	 * mental condition between 0..1
+	 * these needs need to be satisfied in order to maintain health
+	 *
 	 * @return
 	 */
-	Float getMentalHealth();
-	void setMentalHealth(Float mentalHealth);
+	Set<Need> getNeedSet();
 
-	/**
-	 * these needs need to be satisfied in order to maintain Health
-	 * @return
-	 */
-	Set<Class<? extends Need>> getNeedSet();
-	void setNeedSet(Set<Class<? extends Need>> needSet);
+	void setNeedSet(Set<Need> needSet);
 
 	/**
 	 * condition for loosing the game, when a Cosmonaut is dead
+	 *
 	 * @return
 	 */
 	boolean isAlive();
+
 	void setAlive(boolean alive);
 
 }

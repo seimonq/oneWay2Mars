@@ -10,20 +10,20 @@ import oneway2mars.util.commands.Eat;
 
 public class UcCommand {
 
-    public void registerCommands(Nifty nifty, Console console, Screen screen, AlphaAlphaMarsApplication app) {
+	public void registerCommands(Nifty nifty, Console console, Screen screen, AlphaAlphaMarsApplication app) {
 
 
-        ConsoleCommands consoleCommands = new ConsoleCommands(nifty, console);
+		ConsoleCommands consoleCommands = new ConsoleCommands(nifty, console);
 
-        // create a simple command (see below for implementation) this class will be called when the command is detected
-        // and register the command as a command with the console
-        ConsoleCommands.ConsoleCommand eat = new Eat(app.getGameModel(), screen);
-        consoleCommands.registerCommand("eat", eat);
+		// create a simple command (see below for implementation) this class will be called when the command is detected
+		// and register the command as a command with the console
+		ConsoleCommands.ConsoleCommand eat = new Eat(app.getGameModel(), screen);
+		consoleCommands.registerCommand("eat", eat);
 
-        //switch engines on/off
-        ConsoleCommands.ConsoleCommand switchEngineState = new ChangeEngineState(app.getGameModel());
-        consoleCommands.registerCommand("engineactive", switchEngineState);
+		//switch engines on/off
+		ConsoleCommands.ConsoleCommand switchEngineState = new ChangeEngineState(app.getGameModel());
+		consoleCommands.registerCommand("engineactive", switchEngineState);
 
-        consoleCommands.enableCommandCompletion(true);
-    }
+		consoleCommands.enableCommandCompletion(true);
+	}
 }

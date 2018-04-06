@@ -10,37 +10,37 @@ import oneway2mars.model.resource.Resource;
 
 public class ViewController {
 
-    private AlphaAlphaModel model;
+	private AlphaAlphaModel model;
 
-    public ViewController (AlphaAlphaModel model) {
-        this.model = model;
-    }
+	public ViewController(AlphaAlphaModel model) {
+		this.model = model;
+	}
 
-    public void updateView(Nifty nifty) {
+	public void updateView(Nifty nifty) {
 
-        Element outputEngine = nifty.getCurrentScreen().findElementById("outputEngine");
+		Element outputEngine = nifty.getCurrentScreen().findElementById("outputEngine");
 
-        String outputEngines = "";
+		String outputEngines = "";
 
-        for(Engine eng : model.getEngines()) {
-            outputEngines += eng.getName() + ": " +
-                    (eng.isActivated()?" activ ":" not activ ") + ", Condition: " + eng
-                            .getCondition() + "\n";
-        }
+		for (Engine eng : model.getEngines()) {
+			outputEngines += eng.getName() + ": " +
+					(eng.isActivated() ? " activ " : " not activ ") + ", Condition: " + eng
+					.getCondition() + "\n";
+		}
 
-        outputEngine.getRenderer(TextRenderer.class).setText(outputEngines);
+		outputEngine.getRenderer(TextRenderer.class).setText(outputEngines);
 
 
-        Element outputResource = nifty.getCurrentScreen().findElementById("outputResource");
+		Element outputResource = nifty.getCurrentScreen().findElementById("outputResource");
 
-        String outputResources = "";
-        for(Resource res : model.getResources()) {
-            outputResources += res.getClass()
-                    .getSimpleName
-                            () + ": " + res.getAmount() + (NonAccumulableResource.class.isAssignableFrom(res
-                    .getClass())? " / " + res.getConsumedNow() + "\n" : "\n");
-        }
+		String outputResources = "";
+		for (Resource res : model.getResources()) {
+			outputResources += res.getClass()
+					.getSimpleName
+							() + ": " + res.getAmount() + (NonAccumulableResource.class.isAssignableFrom(res
+					.getClass()) ? " / " + res.getConsumedNow() + "\n" : "\n");
+		}
 
-        outputResource.getRenderer(TextRenderer.class).setText(outputResources);
-    }
+		outputResource.getRenderer(TextRenderer.class).setText(outputResources);
+	}
 }
