@@ -1,5 +1,9 @@
 package oneway2mars.model.health;
 
+import javafx.util.Pair;
+
+import java.util.Map;
+
 public interface Health {
 
 	/**
@@ -8,7 +12,7 @@ public interface Health {
 	 */
 	Float getHealthState();
 
-	void setHealthState();
+	void setHealthState(Float healthState);
 
 	/**
 	 * factor between 0..1 how likely death is
@@ -17,5 +21,16 @@ public interface Health {
 	 */
 	Float getRiskOfDeathFactor();
 
-	void setRiskOfDeathFactor();
+	void setRiskOfDeathFactor(Float riskOfDeathFactor);
+
+	/**
+	 * satisfaction effects on health
+	 */
+
+	void satisfy(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
+
+	/**
+	 * dissatisfaction effects on health
+	 */
+	void dissatisfy(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
 }

@@ -99,7 +99,7 @@ public abstract class AbstractEngine implements Engine {
 	}
 
 	@Override
-	public void shiftToNextRound() {
+	public void shiftToNextHeartbeat() {
 		resourceSaturation = 1.0f;
 	}
 

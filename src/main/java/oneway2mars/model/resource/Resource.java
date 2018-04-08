@@ -16,7 +16,7 @@ public interface Resource {
 
     /**
      *
-     * @return total production last round
+     * @return total production last heartbeat
      */
     Float getProducedLast();
 
@@ -24,7 +24,7 @@ public interface Resource {
 
     /**
      *
-     * @return total consumption last round
+     * @return total consumption last heartbeat
      */
     Float getConsumedLast();
 
@@ -33,7 +33,7 @@ public interface Resource {
 
     /**
      *
-     * @return total production this round
+     * @return total production this heartbeat
      */
     Float getProducedNow();
 
@@ -41,7 +41,7 @@ public interface Resource {
 
     /**
      *
-     * @return total consumption this round
+     * @return total consumption this heartbeat
      */
     Float getConsumedNow();
 
@@ -50,14 +50,21 @@ public interface Resource {
     /**
      * set Now to Last values and empties Now values
      */
-    void shiftToNextRound();
+    void shiftToNextHeartbeat();
 
     void calcConsumedNow(List<Engine> workingEngines);
 
     void calcProducedNow(List<Engine> workingEngines);
 
     /**
-     * used to determine total amount of resource after round
+     * used to determine total amount of resource after heartbeat
      */
-    void calcAmountAfterRound();
+    void calcAmountAfterHeartbeat();
+
+    /**
+     * checks if given amount is available and returns true
+     * otherwise false
+     */
+    boolean inStock(Float requestAmount);
+
 }

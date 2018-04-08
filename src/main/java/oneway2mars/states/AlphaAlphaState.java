@@ -48,6 +48,8 @@ public class AlphaAlphaState extends BaseAppState{
         }
 
         if (heartBeat % PULSE == 0) {
+            app.getUcCosmonaut().satisfyNeeds(app.getGameModel().getCosmonauts(),app
+                    .getGameModel().getResources());
             app.getUcResource().updateResources(app.getGameModel());
             app.getViewController().updateView(nifty);
         }

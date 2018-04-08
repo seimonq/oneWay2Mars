@@ -34,4 +34,10 @@ public interface Cosmonaut {
 
 	void setAlive(boolean alive);
 
+	/**
+	 * raise urgency of needs each heartbeat
+	 */
+	void updateNeeds();
+
+
 }

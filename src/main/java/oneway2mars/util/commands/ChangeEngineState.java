@@ -6,6 +6,7 @@ import oneway2mars.model.engine.Engine;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class ChangeEngineState extends AbstractCommand implements ConsoleCommands.ConsoleCommand {
 
@@ -27,7 +28,7 @@ public class ChangeEngineState extends AbstractCommand implements ConsoleCommand
 
     }
 
-    private Optional<Engine> findEngineByName(List<Engine> engines, String searchName) {
+    private Optional<Engine> findEngineByName(Set<Engine> engines, String searchName) {
         return engines.stream().filter( eng -> eng.getName().equals(searchName)).findFirst();
     }
 }

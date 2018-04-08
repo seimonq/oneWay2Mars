@@ -64,7 +64,7 @@ public class AbstractResource implements Resource {
 	}
 
 	@Override
-	public void shiftToNextRound() {
+	public void shiftToNextHeartbeat() {
 		consumedLast = consumedNow;
 		producedLast = producedNow;
 
@@ -112,7 +112,7 @@ public class AbstractResource implements Resource {
 	}
 
 	@Override
-	public void calcAmountAfterRound() {
+	public void calcAmountAfterHeartbeat() {
 		if(this instanceof AccumulableResource) {
 			amount -= consumedNow;
 			amount += producedNow;
@@ -120,5 +120,14 @@ public class AbstractResource implements Resource {
 		else if(this instanceof NonAccumulableResource) {
 			amount = producedNow;
 		}
+	}
+
+	@Override
+	public boolean inStock(Float requestAmount) {
+		if(requestAmount == null || requestAmount == 0.0f || requestAmount < amount) {
+			return true;
+		}
+		return false;
+
 	}
 }

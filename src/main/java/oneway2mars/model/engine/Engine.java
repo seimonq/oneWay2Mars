@@ -82,12 +82,12 @@ public interface Engine {
 	void multiplyResourceSaturation(Float resourceSaturation);
 
 	/**
-	 * reset round specific values
+	 * reset heartbeat specific values
 	 */
-	void shiftToNextRound();
+	void shiftToNextHeartbeat();
 
 	/**
-	 * sets efficiency for producing resources this round
+	 * sets efficiency for producing resources this heartbeat
 	 */
 	void calcEfficiency();
 }

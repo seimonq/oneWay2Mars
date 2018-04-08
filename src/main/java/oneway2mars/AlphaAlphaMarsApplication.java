@@ -9,6 +9,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.scene.Geometry;
 import com.jme3.system.AppSettings;
 import oneway2mars.controller.GameController;
+import oneway2mars.controller.UcCosmonaut;
 import oneway2mars.controller.UcResource;
 import oneway2mars.controller.ViewController;
 import oneway2mars.model.AlphaAlphaModel;
@@ -24,6 +25,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
     private AlphaAlphaModel gameModel;
     private UcResource ucResource;
+    private UcCosmonaut ucCosmonaut;
     private GameController gameController;
     protected ViewController viewController;
 
@@ -39,6 +41,9 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
         return ucResource;
     }
 
+    public UcCosmonaut getUcCosmonaut() {
+        return ucCosmonaut;
+    }
 
     public GameController getGameController() {
         return gameController;
@@ -105,6 +110,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
         //add controller
         this.gameModel = new AlphaAlphaModel();
         this.ucResource = new UcResource(this.getGameModel());
+        this.ucCosmonaut = new UcCosmonaut();
         this.gameController = new GameController(this.getGameModel());
         this.viewController = new ViewController(this.getGameModel());
 
