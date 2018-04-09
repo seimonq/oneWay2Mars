@@ -9,14 +9,14 @@
                    backgroundColor="#aa0f">
                 <text text="One Way 2 Mars" font="Interface/Fonts/Default.fnt" width="100%"/>
 
-                <text id="synopsisAlpha" text="&#10;&#10; Ich bin Elon. Ich wurde programmiert, um die erste humaniode Mars Mission zu steuern.
+                <text id="synopsisAlpha" text="&#10; Ich bin Elon. Ich wurde programmiert, um die erste humaniode Mars Mission zu steuern.
 							&#10;Natürlich ohne Rückflugticket..." font="Interface/Fonts/Default.fnt" color="#000f"
-                      wrap="true" width="60%"/>
+                      wrap="true" width="100%"/>
 
             </panel>
-            <panel height="70%" width="100%" align="center" childLayout="horizontal">
-                <panel height="100%" width="50%" align="center" childLayout="vertical"
-                       style="nifty-panel-bright">
+            <panel height="70%" width="100%" align="center" childLayout="horizontal" backgroundColor="#aa0f">
+                <panel height="100%" width="49%" align="center" childLayout="vertical"
+                       backgroundColor="#aa0f">
                     <panel height="48%" width="100%" align="left" childLayout="vertical" style="nifty-panel-bright">
                         <text text="Engines:&#10;++++++++" font="Interface/Fonts/Default.fnt" color="#000f"/>
                         <text id="outputEngine" text="No engines yet " font="Interface/Fonts/Default.fnt" color="#000f"
@@ -29,8 +29,8 @@
                               color="#000f" wrap="true" width="60%" textHAlign="left"/>
                     </panel>
                 </panel>
-                <panel height="100%" width="50%" align="center" childLayout="vertical"
-                       style="nifty-panel-simple">
+                <panel height="100%" width="*"></panel>
+                <panel height="100%" width="49%" align="center" childLayout="vertical" backgroundColor="#aa0f">
                     <panel height="48%" width="100%" align="left" childLayout="vertical" style="nifty-panel-bright">
                         <text text="Cosmonauts:&#10;++++++++" font="Interface/Fonts/Default.fnt" color="#000f"/>
                         <text id="outputCosmonaut" text="No cosmonauts yet" font="Interface/Fonts/Default.fnt"
