@@ -60,7 +60,7 @@ public class AlphaAlphaMarsApplication extends SimpleApplication {
 
         //constructor true means -> keep default settings plus specified custom settings
         AppSettings mySettings = new AppSettings(true);
-        mySettings.setResolution(1024, 768);
+        mySettings.setResolution(1600, 900);
 
         app.setSettings(mySettings);
         app.settings.setAudioRenderer(null);

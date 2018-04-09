@@ -2,6 +2,7 @@ package oneway2mars.model.need.type;
 
 import javafx.util.Pair;
 import oneway2mars.model.health.Health;
+import oneway2mars.model.health.type.PhysicalHealth;
 import oneway2mars.model.need.AbstractNeed;
 import oneway2mars.util.constants.InitialGameConstants;
 
@@ -16,7 +17,7 @@ public class Hunger extends AbstractNeed {
 		setNeededResource(InitialGameConstants.NEED_HUNGER_RESOURCE_FOOD);
 
 		setSatisfactionMap(new HashMap<Class<? extends Health>, Pair<Float, Float>>() {{
-			put(Health.class, InitialGameConstants.NEED_HUNGER_SATISFACTION_HEALTH_PHYSICAL);
+			put(PhysicalHealth.class, InitialGameConstants.NEED_HUNGER_SATISFACTION_HEALTH_PHYSICAL);
 		}});
 
 	}

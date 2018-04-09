@@ -8,16 +8,14 @@ import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
 import oneway2mars.controller.UcCommand;
 import oneway2mars.screen.AlphaAlphaScreenController;
+import oneway2mars.util.constants.InitialGameConstants;
 
 public class AlphaAlphaState extends BaseAppState{
 
-    private static final Integer PULSE = 1500;
     private Nifty nifty;
-    private Screen screen;
     private AlphaAlphaMarsApplication app;
     private NiftyJmeDisplay niftyDisplay;
     private Integer heartBeat;
-    private UcCommand ucCommand;
 
     /**
      * this method is executed after the state is initialized from simpleInitApp()
@@ -41,17 +39,21 @@ public class AlphaAlphaState extends BaseAppState{
 
     @Override
     public void update(float tpf) {
-        if (heartBeat == null || heartBeat > PULSE) {
+        if (heartBeat == null || heartBeat > InitialGameConstants.HEARTBEAT_PULSE) {
             heartBeat = 1;
         } else {
             heartBeat++;
         }
 
-        if (heartBeat % PULSE == 0) {
+        if (heartBeat % InitialGameConstants.HEARTBEAT_PULSE == 0) {
+
             app.getUcCosmonaut().satisfyNeeds(app.getGameModel().getCosmonauts(),app
                     .getGameModel().getResources());
+            app.getUcCosmonaut().calcRiskOfDeath(app.getGameModel().getCosmonauts());
+
             app.getUcResource().updateResources(app.getGameModel());
             app.getViewController().updateView(nifty);
+
         }
     }
 

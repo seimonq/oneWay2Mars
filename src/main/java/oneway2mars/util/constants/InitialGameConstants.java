@@ -3,7 +3,6 @@ package oneway2mars.util.constants;
 import javafx.util.Pair;
 import oneway2mars.model.resource.Resource;
 import oneway2mars.model.resource.type.Food;
-import sun.plugin2.os.windows.FLASHWINFO;
 
 public final class InitialGameConstants {
 
@@ -12,7 +11,7 @@ public final class InitialGameConstants {
 	 */
 
 	public final static Float DEFAULT_CONDITION = 1.0f;
-
+	public final static Integer HEARTBEAT_PULSE = 2500;
 	/**
 	 * engine configuration
 	 */

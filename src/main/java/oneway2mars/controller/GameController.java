@@ -27,6 +27,8 @@ public class GameController {
 				(), new OxigenGenerator(), new Rover(), new WaterTreatment())));
 
 		Cosmonaut siegmund = new Siegmund();
+		siegmund.setAlive(true);
+
 		siegmund.setHealthSet(new HashSet<>(Arrays.asList(new PhysicalHealth())));
 		siegmund.setNeedSet(new HashSet<>(Arrays.asList(new Hunger())));
 
