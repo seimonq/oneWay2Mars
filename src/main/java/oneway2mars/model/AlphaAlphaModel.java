@@ -7,6 +7,7 @@ import oneway2mars.model.resource.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class AlphaAlphaModel {
@@ -17,6 +18,8 @@ public class AlphaAlphaModel {
     private Set<Cosmonaut> cosmonauts;
     private Set<Event> events;
 
+    private Long currentHeartbeat;
+    private Optional<Event> eventAwaitsDecision;
 
     public Set<Resource> getResources() {
         return resources;
@@ -48,5 +51,21 @@ public class AlphaAlphaModel {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public Long getCurrentHeartbeat() {
+        return currentHeartbeat;
+    }
+
+    public void setCurrentHeartbeat(Long currentHeartbeat) {
+        this.currentHeartbeat = currentHeartbeat;
+    }
+
+    public Optional<Event> getEventAwaitsDecision() {
+        return eventAwaitsDecision;
+    }
+
+    public void setEventAwaitsDecision(Optional<Event> eventAwaitsDecision) {
+        this.eventAwaitsDecision = eventAwaitsDecision;
     }
 }

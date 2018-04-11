@@ -7,6 +7,7 @@ import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
 import oneway2mars.util.commands.ChangeEngineState;
 import oneway2mars.util.commands.Eat;
+import oneway2mars.util.commands.Wahl;
 
 public class UcCommand {
 
@@ -23,6 +24,10 @@ public class UcCommand {
 		//switch engines on/off
 		ConsoleCommands.ConsoleCommand switchEngineState = new ChangeEngineState(app.getGameModel());
 		consoleCommands.registerCommand("engineactive", switchEngineState);
+
+		//decide something for an event
+		ConsoleCommands.ConsoleCommand decideEvent = new Wahl(app.getGameModel());
+		consoleCommands.registerCommand("wahl",decideEvent);
 
 		consoleCommands.enableCommandCompletion(true);
 	}

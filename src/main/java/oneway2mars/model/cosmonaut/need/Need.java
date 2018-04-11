@@ -1,7 +1,7 @@
-package oneway2mars.model.need;
+package oneway2mars.model.cosmonaut.need;
 
 import javafx.util.Pair;
-import oneway2mars.model.health.Health;
+import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.resource.Resource;
 
 import java.util.Map;

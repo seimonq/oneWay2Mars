@@ -4,72 +4,90 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.controller.UcCommand;
+import oneway2mars.model.event.Event;
 import oneway2mars.screen.AlphaAlphaScreenController;
 import oneway2mars.util.constants.InitialGameConstants;
 
-public class AlphaAlphaState extends BaseAppState{
+import java.util.Optional;
 
-    private Nifty nifty;
-    private AlphaAlphaMarsApplication app;
-    private NiftyJmeDisplay niftyDisplay;
-    private Integer heartBeat;
+public class AlphaAlphaState extends BaseAppState {
 
-    /**
-     * this method is executed after the state is initialized from simpleInitApp()
-     * it is important to pass the application instance to the actual controller of the xml file
-     * screen methods cannot access game data otherwise
-     *
-     * @param application
-     */
-    @Override
-    public void initialize(Application application) {
+	private Nifty nifty;
+	private AlphaAlphaMarsApplication app;
+	private NiftyJmeDisplay niftyDisplay;
+	private Integer heartBeat;
 
-        this.app = (AlphaAlphaMarsApplication) application;
+	/**
+	 * this method is executed after the state is initialized from simpleInitApp()
+	 * it is important to pass the application instance to the actual controller of the xml file
+	 * screen methods cannot access game data otherwise
+	 *
+	 * @param application
+	 */
+	@Override
+	public void initialize(Application application) {
+
+		this.app = (AlphaAlphaMarsApplication) application;
 
 
-        niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
-                app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
-        nifty = niftyDisplay.getNifty();
-        nifty.fromXml("alphaAlphaScreen.xml", "alphaAlphaScreen", new AlphaAlphaScreenController(this.app));
+		niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
+				app.getAssetManager(), app.getInputManager(), app.getAudioRenderer(), app.getGuiViewPort());
+		nifty = niftyDisplay.getNifty();
+		nifty.fromXml("alphaAlphaScreen.xml", "alphaAlphaScreen", new AlphaAlphaScreenController(this.app));
 
-    }
+	}
 
-    @Override
-    public void update(float tpf) {
-        if (heartBeat == null || heartBeat > InitialGameConstants.HEARTBEAT_PULSE) {
-            heartBeat = 1;
-        } else {
-            heartBeat++;
-        }
+	@Override
+	public void update(float tpf) {
+		if (heartBeat == null || heartBeat > InitialGameConstants.HEARTBEAT_PULSE) {
+			heartBeat = 1;
+		} else {
+			heartBeat++;
+		}
+			//call every heartbeat by PULSE rate and only if no event awaits a decision
+		if (heartBeat % InitialGameConstants.HEARTBEAT_PULSE == 0 && !app.getGameModel()
+				.getEventAwaitsDecision().isPresent()) {
 
-        if (heartBeat % InitialGameConstants.HEARTBEAT_PULSE == 0) {
+			app.getGameModel().setCurrentHeartbeat(incrementCurrentHeartbeat(app.getGameModel()
+					.getCurrentHeartbeat()));
 
-            app.getUcCosmonaut().satisfyNeeds(app.getGameModel().getCosmonauts(),app
-                    .getGameModel().getResources());
-            app.getUcCosmonaut().calcRiskOfDeath(app.getGameModel().getCosmonauts());
+			app.getUcCosmonaut().satisfyNeeds(app.getGameModel().getCosmonauts(), app
+					.getGameModel().getResources());
+			app.getUcCosmonaut().calcRiskOfDeath(app.getGameModel().getCosmonauts());
 
-            app.getUcResource().updateResources(app.getGameModel());
-            app.getViewController().updateView(nifty);
+			app.getUcResource().updateResources(app.getGameModel());
+			app.getViewController().updateView(nifty);
 
-        }
-    }
+			app.getGameModel().setEventAwaitsDecision(app.getUcEvent().optionForEvent(app
+					.getGameModel()));
+			app.getUcEvent().applyEventEffects(app.getGameModel());
 
-    @Override
-    public void cleanup(Application app) {
-    }
+		}
+	}
 
-    @Override
-    public void onDisable() {
-        app.getGuiViewPort().clearProcessors();
+	@Override
+	public void cleanup(Application app) {
+	}
 
-    }
+	@Override
+	public void onDisable() {
+		app.getGuiViewPort().clearProcessors();
 
-    @Override
-    public void onEnable() {
-        app.getGuiViewPort().addProcessor(niftyDisplay);
-        app.getGameController().initGame();
-    }
+	}
+
+	@Override
+	public void onEnable() {
+		app.getGuiViewPort().addProcessor(niftyDisplay);
+		app.getGameController().initGame();
+	}
+
+	private Long incrementCurrentHeartbeat(Long heartbeat) {
+		if (heartbeat == null) {
+			heartbeat = 1L;
+		} else {
+			heartbeat++;
+		}
+		return heartbeat;
+	}
 }

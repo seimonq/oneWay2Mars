@@ -1,7 +1,7 @@
 package oneway2mars.model.cosmonaut;
 
-import oneway2mars.model.health.Health;
-import oneway2mars.model.need.Need;
+import oneway2mars.model.cosmonaut.health.Health;
+import oneway2mars.model.cosmonaut.need.Need;
 
 import java.util.Set;
 

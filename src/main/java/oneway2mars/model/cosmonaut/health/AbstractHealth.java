@@ -1,4 +1,4 @@
-package oneway2mars.model.health;
+package oneway2mars.model.cosmonaut.health;
 
 import javafx.util.Pair;
 

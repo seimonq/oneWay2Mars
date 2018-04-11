@@ -1,9 +1,9 @@
-package oneway2mars.model.need.type;
+package oneway2mars.model.cosmonaut.need.type;
 
 import javafx.util.Pair;
-import oneway2mars.model.health.Health;
-import oneway2mars.model.health.type.PhysicalHealth;
-import oneway2mars.model.need.AbstractNeed;
+import oneway2mars.model.cosmonaut.health.Health;
+import oneway2mars.model.cosmonaut.health.type.PhysicalHealth;
+import oneway2mars.model.cosmonaut.need.AbstractNeed;
 import oneway2mars.util.constants.InitialGameConstants;
 
 import java.util.HashMap;
