@@ -1,4 +1,4 @@
-package oneway2mars.util.commands;
+package oneway2mars.commands;
 
 import de.lessvoid.nifty.controls.ConsoleCommands;
 import de.lessvoid.nifty.elements.Element;

@@ -18,7 +18,8 @@ public class UcEvent {
 	 */
 	public Optional<Event> optionForEvent(AlphaAlphaModel model) {
 
-		Set<Event> possibleEvents = model.getEvents().stream().filter(ev -> ev.conditionMet(model)).collect
+		Set<Event> possibleEvents = model.getEvents().stream().filter(ev -> ev.conditionMet
+				(model) && !ev.isActive()).collect
 				(Collectors.toSet());
 
 		for (Event event : possibleEvents) {
@@ -42,6 +43,7 @@ public class UcEvent {
 			activeEvents.forEach(ev -> {
 				ev.applyEffect(model);
 				if (ev.checkDeactivation(model.getCurrentHeartbeat())) {
+					ev.setDecision(null);
 					ev.setActive(false);
 				}
 			});

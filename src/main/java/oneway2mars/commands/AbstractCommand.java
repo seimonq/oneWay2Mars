@@ -1,4 +1,4 @@
-package oneway2mars.util.commands;
+package oneway2mars.commands;
 
 import oneway2mars.model.AlphaAlphaModel;
 

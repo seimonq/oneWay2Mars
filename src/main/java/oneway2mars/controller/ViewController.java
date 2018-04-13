@@ -6,8 +6,15 @@ import de.lessvoid.nifty.elements.render.TextRenderer;
 import oneway2mars.model.AlphaAlphaModel;
 import oneway2mars.model.cosmonaut.Cosmonaut;
 import oneway2mars.model.engine.Engine;
+import oneway2mars.model.event.Decision;
+import oneway2mars.model.event.Event;
+import oneway2mars.model.event.EventText;
 import oneway2mars.model.resource.NonAccumulableResource;
 import oneway2mars.model.resource.Resource;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ViewController {
 
@@ -84,7 +91,28 @@ public class ViewController {
 
 		Element outputEvent = nifty.getCurrentScreen().findElementById("outputEvent");
 		String eventString = "";
-		boolean gameOver = false;
+
+		Set<Event> activeEvents = model.getEvents().stream().filter( ev -> ev.isActive()).collect
+				(Collectors.toSet());
+
+		if(!CollectionUtils.isEmpty(activeEvents)) {
+			for(Event ev : activeEvents) {
+				eventString += ev.getEventText(EventText.Question) + "\n";
+
+				if(ev.getDecision() == Decision.ACCEPTED) {
+					eventString += ev.getEventText(EventText.DecisionA) + "\n";
+				}
+				else if(ev.getDecision() == Decision.DENIED) {
+					eventString += ev.getEventText(EventText.DecisionB) + "\n";
+				}
+				eventString += "**********************\n";
+			}
+			outputEvent.getRenderer(TextRenderer.class).setText(eventString);
+
+		} else {
+			outputEvent.getRenderer(TextRenderer.class).setText("No ongoing events.");
+
+		}
 		if (model.getCosmonauts().stream().anyMatch(cos -> !cos.isAlive())) {
 			eventString = "Siegmund ist tot. Das Spiel ist aus.";
 			outputEvent.getRenderer(TextRenderer.class).setText(eventString);

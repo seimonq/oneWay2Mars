@@ -11,7 +11,7 @@ public final class InitialGameConstants {
 	 */
 
 	public final static Float DEFAULT_CONDITION = 1.0f;
-	public final static Integer HEARTBEAT_PULSE = 200;
+	public final static Integer HEARTBEAT_PULSE = 2500;
 	/**
 	 * engine configuration
 	 */

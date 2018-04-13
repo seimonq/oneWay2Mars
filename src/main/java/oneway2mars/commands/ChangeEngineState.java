@@ -1,10 +1,9 @@
-package oneway2mars.util.commands;
+package oneway2mars.commands;
 
 import de.lessvoid.nifty.controls.ConsoleCommands;
 import oneway2mars.model.AlphaAlphaModel;
 import oneway2mars.model.engine.Engine;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

@@ -2,6 +2,7 @@ package oneway2mars.model.event;
 
 import oneway2mars.model.AlphaAlphaModel;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class AbstractEvent implements Event{
@@ -10,7 +11,7 @@ public class AbstractEvent implements Event{
 	private Long lastOccurence;
 	private Integer effectTime;
 	private Decision decision;
-	private Map<EventText,String> eventText;
+	private Map<EventText,String> eventText = new HashMap<>();
 	private boolean active;
 
 	@Override
@@ -75,7 +76,7 @@ public class AbstractEvent implements Event{
 
 	@Override
 	public boolean checkDeactivation(Long currentHeartbeat) {
-		return (getLastOccurence() + getEffectTime() >= currentHeartbeat);
+		return (getLastOccurence() + getEffectTime() <= currentHeartbeat);
 	}
 
 	@Override

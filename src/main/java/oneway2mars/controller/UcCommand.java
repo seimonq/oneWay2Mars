@@ -5,9 +5,9 @@ import de.lessvoid.nifty.controls.Console;
 import de.lessvoid.nifty.controls.ConsoleCommands;
 import de.lessvoid.nifty.screen.Screen;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.util.commands.ChangeEngineState;
-import oneway2mars.util.commands.Eat;
-import oneway2mars.util.commands.Wahl;
+import oneway2mars.commands.ChangeEngineState;
+import oneway2mars.commands.Eat;
+import oneway2mars.commands.Wahl;
 
 public class UcCommand {
 
