@@ -74,6 +74,8 @@ public class AbstractResource implements Resource {
 
 	@Override
 	public void calcConsumedNow(List<Engine> workingEngines) {
+
+		//todo refactor that this class has to do less logic
 		if (consumedNow == null) {
 			consumedNow = 0f;
 		}
@@ -98,6 +100,9 @@ public class AbstractResource implements Resource {
 
 	@Override
 	public void calcProducedNow(List<Engine> workingEngines) {
+
+		//todo refactor that this class has to do less logic
+
 		if(producedNow == null) {
 			producedNow = 0f;
 		}

@@ -75,7 +75,7 @@ public class ViewController {
 						+ " ";
 			});
 			cosmonautString += "\n";
-			cos.getNeedSet().forEach(need -> {
+			cos.getNeeds().forEach(need -> {
 				cosmonautString += need.getClass().getSimpleName() + " - Urgency: " + need
 						.getUrgency() + " ";
 			});

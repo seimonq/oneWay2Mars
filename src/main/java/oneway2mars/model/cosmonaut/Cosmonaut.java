@@ -1,8 +1,10 @@
 package oneway2mars.model.cosmonaut;
 
+import oneway2mars.model.activity.Activity;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 
+import java.util.List;
 import java.util.Set;
 
 public interface Cosmonaut {
@@ -17,13 +19,11 @@ public interface Cosmonaut {
 	void setHealthSet(Set<Health> healthSet);
 
 	/**
-	 * these needs need to be satisfied in order to maintain health
-	 *
-	 * @return
+	 * @return ordered list by urgency of needs for cosmonaut
 	 */
-	Set<Need> getNeedSet();
+	List<Need> getNeeds();
 
-	void setNeedSet(Set<Need> needSet);
+	void setNeeds(List<Need> needSet);
 
 	/**
 	 * condition for loosing the game, when a Cosmonaut is dead
@@ -39,5 +39,28 @@ public interface Cosmonaut {
 	 */
 	void updateNeeds();
 
+	/**
+	 * stores last activity of cosmonaut
+	 *
+	 * @return value of {@link Activity}
+	 */
+	Activity getLastActivity();
 
+	void setLastActivity(Activity activity);
+
+	/**
+	 * stores current activity of cosmonaut
+	 *
+	 * @return value of {@link Activity}
+	 */
+	Activity getCurrentActivity();
+
+	void setCurrentActivity(Activity activity);
+
+	/**
+	 * @return all possible {@link Activity} for {@link Cosmonaut}
+	 */
+	Set<Activity> getAvailableActivities();
+
+	void setAvailableActivities(Set<Activity> availableActivities);
 }

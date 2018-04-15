@@ -75,5 +75,5 @@ public final class InitialGameConstants {
 	public final static Pair<Class<? extends Resource>, Float> NEED_HUNGER_RESOURCE_FOOD = new
 			Pair(Food.class, 20f);
 
-
+	public static final Float NEED_SATISFACTION_THRESHOLD = .95f;
 }

@@ -33,7 +33,7 @@ public class GameController {
 		siegmund.setAlive(true);
 
 		siegmund.setHealthSet(new HashSet<>(Arrays.asList(new PhysicalHealth())));
-		siegmund.setNeedSet(new HashSet<>(Arrays.asList(new Hunger())));
+		siegmund.setNeeds(Arrays.asList(new Hunger()));
 
 		model.setCosmonauts(new HashSet<>(Arrays.asList(siegmund)));
 
