@@ -3,6 +3,7 @@ package oneway2mars.model.cosmonaut;
 import oneway2mars.model.activity.Activity;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
+import oneway2mars.model.resource.Resource;
 
 import java.util.List;
 import java.util.Set;
@@ -63,4 +64,14 @@ public interface Cosmonaut {
 	Set<Activity> getAvailableActivities();
 
 	void setAvailableActivities(Set<Activity> availableActivities);
+
+	/**
+	 * update resources and health state
+	 */
+	void processActivity(Set<Resource> resources);
+
+	/**
+	 * sets a new Activity when the current is done
+	 */
+	void updateActivity();
 }

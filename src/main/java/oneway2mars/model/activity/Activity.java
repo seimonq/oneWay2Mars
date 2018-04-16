@@ -6,6 +6,7 @@ import oneway2mars.model.resource.Resource;
 import oneway2mars.util.constants.classes.Effect;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface Activity {
 
@@ -79,5 +80,12 @@ public interface Activity {
 	 * set all necessary data when activity starts
 	 */
 	void startActivity();
+
+	/**
+	 * updates amount of {@link Resource} in game
+	 * @param resources of game model {@link Resource}
+	 */
+	void updateResource(Set<Resource> resources);
+
 
 }

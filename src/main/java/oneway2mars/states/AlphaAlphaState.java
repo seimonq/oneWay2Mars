@@ -5,11 +5,8 @@ import com.jme3.app.state.BaseAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
 import oneway2mars.AlphaAlphaMarsApplication;
-import oneway2mars.model.event.Event;
 import oneway2mars.screen.AlphaAlphaScreenController;
 import oneway2mars.util.constants.InitialGameConstants;
-
-import java.util.Optional;
 
 public class AlphaAlphaState extends BaseAppState {
 
@@ -53,7 +50,7 @@ public class AlphaAlphaState extends BaseAppState {
 			app.getGameModel().setCurrentHeartbeat(incrementCurrentHeartbeat(app.getGameModel()
 					.getCurrentHeartbeat()));
 
-			app.getUcCosmonaut().satisfyNeeds(app.getGameModel().getCosmonauts(), app
+			app.getUcCosmonaut().updateCosmonautState(app.getGameModel().getCosmonauts(), app
 					.getGameModel().getResources());
 			app.getUcCosmonaut().calcRiskOfDeath(app.getGameModel().getCosmonauts());
 
