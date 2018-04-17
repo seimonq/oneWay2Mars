@@ -1,104 +1,133 @@
 package oneway2mars.model.activity;
 
+import javafx.util.Pair;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
-import oneway2mars.util.constants.classes.Effect;
+import oneway2mars.util.classes.Effect;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class AbstractActivity implements Activity {
+public abstract class AbstractActivity implements Activity {
 
-	//todo implement
+	private boolean active;
+	private Float saturation;
+	private Pair<Class<? extends Need>,Float> satisfiedNeed;
+	private Integer duration;
+	private Long startedAt;
+
+	private Map<Class<? extends Resource>, Float> consumerMap = new HashMap<>();
+
+	private Map<Class<? extends Resource>, Float> producerMap = new HashMap<>();
+	private Map<Class<? extends Health>, Effect> healthEffectMap = new HashMap<>();
 
 	@Override
 	public boolean isActive() {
-		return false;
+		return active;
 	}
 
 	@Override
 	public void setActive(boolean active) {
-
+		this.active = active;
 	}
 
 	@Override
-	public Class<? extends Need> getSatisfiedNeed() {
-		return null;
+	public Pair<Class<? extends Need>,Float> getSatisfiedNeed() {
+		return satisfiedNeed;
 	}
 
 	@Override
-	public void setSatisfiedNeed(Class<? extends Need> need) {
-
+	public void setSatisfiedNeed(Pair<Class<? extends Need>,Float> satisfiedNeed) {
+		this.satisfiedNeed = satisfiedNeed;
 	}
 
 	@Override
 	public Integer getDuration() {
-		return null;
+		return duration;
 	}
 
 	@Override
 	public void setDuration(Integer duration) {
-
+		this.duration = duration;
 	}
 
 	@Override
 	public Long getStarted() {
-		return null;
+		return startedAt;
 	}
 
 	@Override
-	public void setStarted(Long lastStarted) {
-
+	public void setStarted(Long startedAt) {
+		this.startedAt = startedAt;
 	}
 
 	@Override
 	public Map<Class<? extends Resource>, Float> getConsumerMap() {
-		return null;
+		return consumerMap;
 	}
 
 	@Override
 	public void setConsumerMap(Map<Class<? extends Resource>, Float> consumerMap) {
-
+		this.consumerMap = consumerMap;
 	}
 
 	@Override
 	public Map<Class<? extends Resource>, Float> getProducerMap() {
-		return null;
+		return producerMap;
 	}
 
 	@Override
 	public void setProducerMap(Map<Class<? extends Resource>, Float> producerMap) {
-
+		this.producerMap = producerMap;
 	}
 
 	@Override
-	public Float getSaturationFactor() {
-		return null;
+	public Float getSaturation() {
+		return saturation;
 	}
 
 	@Override
-	public void setSaturationFactor(Float saturationFactor) {
+	public void setSaturation(Float saturation) {
+		this.saturation = saturation;
+	}
 
+	@Override
+	public void multiplySaturationBy(Float factor) {
+		if (saturation == null) {
+			saturation = 1f;
+		}
+		saturation *= factor;
+
+		saturation = ((saturation < 0f) ? 0f : saturation);
+		saturation = ((saturation > 1f) ? 1f : saturation);
 	}
 
 	@Override
 	public Map<Class<? extends Health>, Effect> getHealthEffectMap() {
-		return null;
+		return healthEffectMap;
 	}
 
 	@Override
-	public boolean continueActivity() {
-		return false;
+	public void setHealthEffectMap(Map<Class<? extends Health>, Effect> healthEffectMap) {
+		this.healthEffectMap = healthEffectMap;
 	}
 
 	@Override
-	public void startActivity() {
+	public boolean continueActivity(Long currentTick) {
+		return startedAt + duration > currentTick;
+	}
 
+	@Override
+	public void startActivity(Long currentTick) {
+		setActive(true);
+		setStarted(currentTick);
+		setSaturation(1f);
 	}
 
 	@Override
 	public void updateResource(Set<Resource> resources) {
-
+		// todo remove
 	}
 }

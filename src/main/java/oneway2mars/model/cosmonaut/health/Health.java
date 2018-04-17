@@ -8,6 +8,7 @@ public interface Health {
 
 	/**
 	 * current State of Health between 1..100
+	 *
 	 * @return
 	 */
 	Float getHealthState();
@@ -33,4 +34,9 @@ public interface Health {
 	 * dissatisfaction effects on health
 	 */
 	void dissatisfy(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
+
+	/**
+	 * can be used to add or substract amount between MAX_AMOUNT and 0
+	 */
+	void add(Float addHealth);
 }

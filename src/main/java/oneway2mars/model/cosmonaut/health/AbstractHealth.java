@@ -48,4 +48,12 @@ public abstract class AbstractHealth implements Health {
 			}
 		}
 	}
+
+	@Override
+	public void add(Float addHealth) {
+		healthState += addHealth;
+		healthState = (healthState > 1f ? 1f : healthState);
+		healthState = (healthState < 0f ? 0f : healthState);
+	}
+
 }

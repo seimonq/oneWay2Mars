@@ -36,9 +36,9 @@ public interface Cosmonaut {
 	void setAlive(boolean alive);
 
 	/**
-	 * raise urgency of needs each heartbeat
+	 * raise urgency of needs each tick
 	 */
-	void updateNeeds();
+	void shiftToNextTick();
 
 	/**
 	 * stores last activity of cosmonaut

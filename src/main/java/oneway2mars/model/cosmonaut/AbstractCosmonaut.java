@@ -51,8 +51,9 @@ public abstract class AbstractCosmonaut implements Cosmonaut {
 	}
 
 	@Override
-	public void updateNeeds() {
+	public void shiftToNextTick() {
 		needSet.forEach(need -> need.updateUrgency(need.getUrgencyRate()));
+		getCurrentActivity().setSaturation(1f);
 	}
 
 	@Override
@@ -87,32 +88,13 @@ public abstract class AbstractCosmonaut implements Cosmonaut {
 
 	@Override
 	public void processActivity(Set<Resource> resources) {
-
-
+		//todo remove
 	}
 
 	@Override
 	public void updateActivity() {
-		if (getCurrentActivity() == null || !getCurrentActivity()
-				.continueActivity()) {
-			setLastActivity(getCurrentActivity());
-			setCurrentActivity(findNextActivity(getNeeds(), getAvailableActivities()));
-			getCurrentActivity().startActivity();
-		}
+		//todo remove
 	}
 
-	private Activity findNextActivity(List<Need> needs, Set<Activity> activities) {
-		Activity newActivity;
-		for (Need need : needs) {
-			if (need.getUrgency() > InitialGameConstants.NEED_SATISFACTION_THRESHOLD) {
-
-				newActivity = activities.stream().filter(ac -> ac.getSatisfiedNeed().equals(need
-						.getClass())).findAny().get();
-			}
-		}
-		newActivity = new DoNothing();
-
-		return newActivity;
-	}
 
 }

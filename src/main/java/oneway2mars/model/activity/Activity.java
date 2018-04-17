@@ -1,9 +1,10 @@
 package oneway2mars.model.activity;
 
+import javafx.util.Pair;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
-import oneway2mars.util.constants.classes.Effect;
+import oneway2mars.util.classes.Effect;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,21 +19,22 @@ public interface Activity {
 	void setActive(boolean active);
 
 	/**
-	 * @return activity reduces need urgency when an cosmonaut is doing this activity
+	 * @return activity reduces need urgency by given amount
+	 * when a cosmonaut is doing this activity
 	 */
-	Class<? extends Need> getSatisfiedNeed();
+	Pair<Class<? extends Need>,Float> getSatisfiedNeed();
 
-	void setSatisfiedNeed(Class<? extends Need> need);
+	void setSatisfiedNeed(Pair<Class<? extends Need>,Float> need);
 
 	/**
-	 * @return amount of heartbeats this activity lasts
+	 * @return amount of ticks this activity lasts
 	 */
 	Integer getDuration();
 
 	void setDuration(Integer duration);
 
 	/**
-	 * @return heartbeat when activity was started
+	 * @return tick when activity was started
 	 */
 	Long getStarted();
 
@@ -62,27 +64,40 @@ public interface Activity {
 	 *
 	 * @return
 	 */
-	Float getSaturationFactor();
+	Float getSaturation();
 
-	void setSaturationFactor(Float saturationFactor);
+	void setSaturation(Float saturation);
+
+	/**
+	 * multiply or devide saturation by
+	 *
+	 * @param factor
+	 */
+	void multiplySaturationBy(Float factor);
 
 	/**
 	 * @return map of {@link Effect} for each {@link Health} type
 	 */
 	Map<Class<? extends Health>, Effect> getHealthEffectMap();
 
+	void setHealthEffectMap(Map<Class<? extends Health>, Effect> healthEffectMap);
+
 	/**
+	 * @param currentTick current tick number
 	 * @return true if activity should be continued
 	 */
-	boolean continueActivity();
+	boolean continueActivity(Long currentTick);
 
 	/**
 	 * set all necessary data when activity starts
+	 *
+	 * @param currentTick current tick number
 	 */
-	void startActivity();
+	void startActivity(Long currentTick);
 
 	/**
 	 * updates amount of {@link Resource} in game
+	 *
 	 * @param resources of game model {@link Resource}
 	 */
 	void updateResource(Set<Resource> resources);

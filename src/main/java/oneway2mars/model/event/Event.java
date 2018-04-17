@@ -67,9 +67,9 @@ public interface Event {
 
 	/**
 	 * checks of effectTime is over
-	 * @param currentHeartbeat
+	 * @param currentTick
 	 * @return true means deactivate event and do not apply effect any more
 	 */
-	boolean checkDeactivation(Long currentHeartbeat);
+	boolean checkDeactivation(Long currentTick);
 
 }

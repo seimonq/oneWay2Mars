@@ -5,7 +5,7 @@ import oneway2mars.model.engine.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractResource implements Resource {
+public abstract class AbstractResource implements Resource {
 
 	private Float amount;
 	private Float producedLast;
@@ -64,7 +64,7 @@ public class AbstractResource implements Resource {
 	}
 
 	@Override
-	public void shiftToNextHeartbeat() {
+	public void shiftToNextTick() {
 		consumedLast = consumedNow;
 		producedLast = producedNow;
 
@@ -117,7 +117,7 @@ public class AbstractResource implements Resource {
 	}
 
 	@Override
-	public void calcAmountAfterHeartbeat() {
+	public void calcAmountAfterTick() {
 		if(this instanceof AccumulableResource) {
 			amount -= consumedNow;
 			amount += producedNow;
@@ -135,4 +135,5 @@ public class AbstractResource implements Resource {
 		return false;
 
 	}
+
 }

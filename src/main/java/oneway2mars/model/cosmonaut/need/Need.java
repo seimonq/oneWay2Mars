@@ -27,10 +27,16 @@ public interface Need {
 	void setUrgency(Float urgency);
 
 	/**
-	 * determines how fast urgency raises
-	 *
-	 * @return
+	 * can be used to add or substract amount between 0 and 1
+	 * @param amountAdded adds on existing urgency
 	 */
+	void addUrgency(Float amountAdded);
+
+		/**
+		 * determines how fast urgency raises
+		 *
+		 * @return
+		 */
 	Float getUrgencyRate();
 
 	void setUrgencyRate(Float urgencyRate);
@@ -45,7 +51,7 @@ public interface Need {
 	void setSatisfactionMap(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
 
 	/**
-	 * add delta to urgency each heartbeat
+	 * add delta to urgency each tick
 	 */
 	void updateUrgency(Float delta);
 }

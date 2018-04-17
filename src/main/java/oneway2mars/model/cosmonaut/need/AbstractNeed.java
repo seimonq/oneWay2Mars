@@ -33,6 +33,12 @@ public abstract class AbstractNeed implements Need {
 	}
 
 	@Override
+	public void addUrgency(Float amountAdded) {
+		urgency += amountAdded;
+		urgency = (urgency > 1f ? 1f : urgency);
+		urgency = (urgency < 0f ? 0f : urgency);
+	}
+	@Override
 	public Float getUrgencyRate() {
 		return urgencyRate;
 	}

@@ -18,7 +18,7 @@ public class AlphaAlphaModel {
     private Set<Cosmonaut> cosmonauts;
     private Set<Event> events;
 
-    private Long currentHeartbeat;
+    private Long currentTick;
     private Optional<Event> eventAwaitsDecision;
 
     public Set<Resource> getResources() {
@@ -53,12 +53,12 @@ public class AlphaAlphaModel {
         this.events = events;
     }
 
-    public Long getCurrentHeartbeat() {
-        return currentHeartbeat;
+    public Long getCurrentTick() {
+        return currentTick;
     }
 
-    public void setCurrentHeartbeat(Long currentHeartbeat) {
-        this.currentHeartbeat = currentHeartbeat;
+    public void setCurrentTick(Long currentTick) {
+        this.currentTick = currentTick;
     }
 
     public Optional<Event> getEventAwaitsDecision() {

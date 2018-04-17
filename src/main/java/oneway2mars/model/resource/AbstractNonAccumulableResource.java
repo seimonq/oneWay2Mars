@@ -1,6 +1,7 @@
 package oneway2mars.model.resource;
 
-public class AbstractNonAccumulableResource extends AbstractResource implements NonAccumulableResource {
+public abstract class AbstractNonAccumulableResource extends AbstractResource implements
+		NonAccumulableResource {
 
 	private Float unusedAmount;
 
@@ -12,5 +13,13 @@ public class AbstractNonAccumulableResource extends AbstractResource implements 
 	@Override
 	public void setUnusedAmount(Float unusedAmount) {
 		this.unusedAmount = unusedAmount;
+	}
+
+	@Override
+	public void add(Float addAmount) {
+		setAmount(getAmount() + addAmount);
+		if(getAmount() < 0) {
+			setAmount(0f);
+		}
 	}
 }

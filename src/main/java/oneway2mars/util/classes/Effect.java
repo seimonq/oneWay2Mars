@@ -1,4 +1,4 @@
-package oneway2mars.util.constants.classes;
+package oneway2mars.util.classes;
 
 public class Effect {
 

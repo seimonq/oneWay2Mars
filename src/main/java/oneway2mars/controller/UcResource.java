@@ -19,10 +19,10 @@ public class UcResource {
 		List<Engine> workingEngines = model.getEngines().stream().filter(eng -> eng.isActivated
 				()).collect(Collectors.toList());
 
-		model.getEngines().forEach(eng -> eng.shiftToNextHeartbeat());
+		model.getEngines().forEach(eng -> eng.shiftToNextTick());
 
 		model.getResources().forEach(res -> {
-			res.shiftToNextHeartbeat();
+			res.shiftToNextTick();
 			res.calcConsumedNow(workingEngines);
 		});
 
@@ -30,7 +30,7 @@ public class UcResource {
 
 		model.getResources().forEach(res -> {
 			res.calcProducedNow(workingEngines);
-			res.calcAmountAfterHeartbeat();
+			res.calcAmountAfterTick();
 		});
 	}
 

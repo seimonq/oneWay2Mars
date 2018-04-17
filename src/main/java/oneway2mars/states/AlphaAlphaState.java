@@ -42,17 +42,16 @@ public class AlphaAlphaState extends BaseAppState {
 		} else {
 			heartBeat++;
 		}
-		//call every heartbeat by PULSE rate and only if no event awaits a decision
+		//call every tick by PULSE rate and only if no event awaits a decision
 		if (heartBeat % InitialGameConstants.HEARTBEAT_PULSE == 0 && !app.getGameModel()
 				.getEventAwaitsDecision().isPresent()) {
 
 			//update game state
-			app.getGameModel().setCurrentHeartbeat(incrementCurrentHeartbeat(app.getGameModel()
-					.getCurrentHeartbeat()));
+			app.getGameModel().setCurrentTick(incrementCurrentTick(app.getGameModel()
+					.getCurrentTick()));
 
 			app.getUcCosmonaut().updateCosmonautState(app.getGameModel().getCosmonauts(), app
-					.getGameModel().getResources());
-			app.getUcCosmonaut().calcRiskOfDeath(app.getGameModel().getCosmonauts());
+					.getGameModel().getResources(),app.getGameModel().getCurrentTick());
 
 			app.getUcResource().updateResources(app.getGameModel());
 
@@ -82,12 +81,12 @@ public class AlphaAlphaState extends BaseAppState {
 		app.getGameController().initGame();
 	}
 
-	private Long incrementCurrentHeartbeat(Long heartbeat) {
-		if (heartbeat == null) {
-			heartbeat = 1L;
+	private Long incrementCurrentTick(Long tick) {
+		if (tick == null) {
+			tick = 1L;
 		} else {
-			heartbeat++;
+			tick++;
 		}
-		return heartbeat;
+		return tick;
 	}
 }

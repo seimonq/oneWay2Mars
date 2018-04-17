@@ -16,7 +16,7 @@ public interface Resource {
 
     /**
      *
-     * @return total production last heartbeat
+     * @return total production last tick
      */
     Float getProducedLast();
 
@@ -24,7 +24,7 @@ public interface Resource {
 
     /**
      *
-     * @return total consumption last heartbeat
+     * @return total consumption last tick
      */
     Float getConsumedLast();
 
@@ -33,7 +33,7 @@ public interface Resource {
 
     /**
      *
-     * @return total production this heartbeat
+     * @return total production this tick
      */
     Float getProducedNow();
 
@@ -41,7 +41,7 @@ public interface Resource {
 
     /**
      *
-     * @return total consumption this heartbeat
+     * @return total consumption this tick
      */
     Float getConsumedNow();
 
@@ -50,21 +50,26 @@ public interface Resource {
     /**
      * set Now to Last values and empties Now values
      */
-    void shiftToNextHeartbeat();
+    void shiftToNextTick();
 
     void calcConsumedNow(List<Engine> workingEngines);
 
     void calcProducedNow(List<Engine> workingEngines);
 
     /**
-     * used to determine total amount of resource after heartbeat
+     * used to determine total amount of resource after tick
      */
-    void calcAmountAfterHeartbeat();
+    void calcAmountAfterTick();
 
     /**
      * checks if given amount is available and returns true
      * otherwise false
      */
     boolean inStock(Float requestAmount);
+
+    /**
+     * can be used to add or substract amount between MAX_AMOUNT and 0
+     */
+    void add(Float addAmount);
 
 }

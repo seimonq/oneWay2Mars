@@ -26,7 +26,7 @@ public class UcEvent {
 			double luckyNumber = Math.random();
 			if (luckyNumber < event.getChance()) {
 				event.setActive(true);
-				event.setLastOccurence(model.getCurrentHeartbeat());
+				event.setLastOccurence(model.getCurrentTick());
 				return Optional.of(event);
 			}
 		}
@@ -42,7 +42,7 @@ public class UcEvent {
 		if (!CollectionUtils.isEmpty(activeEvents)) {
 			activeEvents.forEach(ev -> {
 				ev.applyEffect(model);
-				if (ev.checkDeactivation(model.getCurrentHeartbeat())) {
+				if (ev.checkDeactivation(model.getCurrentTick())) {
 					ev.setDecision(null);
 					ev.setActive(false);
 				}
