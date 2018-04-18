@@ -10,17 +10,7 @@ public abstract class AbstractNeed implements Need {
 
 	private Float urgency;
 	private Float urgencyRate;
-	private Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap;
-	private Pair<Class<? extends Resource>, Float> neededResource;
-
-	@Override
-	public Pair<Class<? extends Resource>, Float> getNeededResource() {
-		return neededResource;
-	}
-
-	public void setNeededResource(Pair<Class<? extends Resource>, Float> neededResource) {
-		this.neededResource = neededResource;
-	}
+	private Map<Class<? extends Health>, Float> healthPenaltyMap;
 
 	@Override
 	public Float getUrgency() {
@@ -48,14 +38,15 @@ public abstract class AbstractNeed implements Need {
 		this.urgencyRate = urgencyRate;
 	}
 
+
 	@Override
-	public Map<Class<? extends Health>, Pair<Float, Float>> getSatisfactionMap() {
-		return satisfactionMap;
+	public Map<Class<? extends Health>, Float> getHealthPenaltyMap() {
+		return healthPenaltyMap;
 	}
 
 	@Override
-	public void setSatisfactionMap(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap) {
-		this.satisfactionMap = satisfactionMap;
+	public void setHealthPenaltyMap(Map<Class<? extends Health>, Float> healthPenaltyMap) {
+		this.healthPenaltyMap = healthPenaltyMap;
 	}
 
 	@Override

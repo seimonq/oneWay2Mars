@@ -1,10 +1,9 @@
-package oneway2mars.model.activity;
+package oneway2mars.model.cosmonaut.activity;
 
 import javafx.util.Pair;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
-import oneway2mars.util.classes.Effect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +20,7 @@ public abstract class AbstractActivity implements Activity {
 	private Map<Class<? extends Resource>, Float> consumerMap = new HashMap<>();
 
 	private Map<Class<? extends Resource>, Float> producerMap = new HashMap<>();
-	private Map<Class<? extends Health>, Effect> healthEffectMap = new HashMap<>();
+	private Map<Class<? extends Health>, Float> healthEffectMap = new HashMap<>();
 
 	@Override
 	public boolean isActive() {
@@ -105,12 +104,12 @@ public abstract class AbstractActivity implements Activity {
 	}
 
 	@Override
-	public Map<Class<? extends Health>, Effect> getHealthEffectMap() {
+	public Map<Class<? extends Health>, Float> getHealthEffectMap() {
 		return healthEffectMap;
 	}
 
 	@Override
-	public void setHealthEffectMap(Map<Class<? extends Health>, Effect> healthEffectMap) {
+	public void setHealthEffectMap(Map<Class<? extends Health>, Float> healthEffectMap) {
 		this.healthEffectMap = healthEffectMap;
 	}
 

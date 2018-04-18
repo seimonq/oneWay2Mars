@@ -8,14 +8,6 @@ import java.util.Map;
 
 public interface Need {
 
-	/**
-	 * Map with resources and amount taken when need needs to be satisfied
-	 *
-	 * @return
-	 */
-	Pair<Class<? extends Resource>, Float> getNeededResource();
-
-	void setNeededResource(Pair<Class<? extends Resource>, Float> neededResourceMap);
 
 	/**
 	 * scale between 1..10 how urgent a need has to be satisfied
@@ -42,13 +34,13 @@ public interface Need {
 	void setUrgencyRate(Float urgencyRate);
 
 	/**
-	 * in case of satisfaction good and bad effect are stored for each {@link Health} type
+	 * in case of high urgency {@link Health} state is reduced by given value
 	 *
 	 * @return
 	 */
-	Map<Class<? extends Health>, Pair<Float, Float>> getSatisfactionMap();
+	Map<Class<? extends Health>, Float> getHealthPenaltyMap();
 
-	void setSatisfactionMap(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
+	void setHealthPenaltyMap(Map<Class<? extends Health>, Float> healthPenaltyMap);
 
 	/**
 	 * add delta to urgency each tick

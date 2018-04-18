@@ -1,11 +1,9 @@
 package oneway2mars.model.cosmonaut;
 
-import oneway2mars.model.activity.Activity;
-import oneway2mars.model.activity.type.DoNothing;
+import oneway2mars.model.cosmonaut.activity.Activity;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
-import oneway2mars.util.constants.InitialGameConstants;
 
 import java.util.List;
 import java.util.Set;

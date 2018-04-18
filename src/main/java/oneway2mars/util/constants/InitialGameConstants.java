@@ -1,8 +1,21 @@
 package oneway2mars.util.constants;
 
-import javafx.util.Pair;
+import oneway2mars.model.cosmonaut.activity.Activity;
+import oneway2mars.model.cosmonaut.activity.type.Eat;
+import oneway2mars.model.cosmonaut.activity.type.Sleep;
+import oneway2mars.model.cosmonaut.health.Health;
+import oneway2mars.model.cosmonaut.health.type.PhysicalHealth;
+import oneway2mars.model.cosmonaut.need.Need;
+import oneway2mars.model.cosmonaut.need.type.Awakeness;
+import oneway2mars.model.cosmonaut.need.type.Hunger;
 import oneway2mars.model.resource.Resource;
 import oneway2mars.model.resource.type.Food;
+import oneway2mars.util.classes.Effect;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static javax.swing.UIManager.put;
 
 public final class InitialGameConstants {
 
@@ -64,16 +77,57 @@ public final class InitialGameConstants {
 	/**
 	 * health configuration
 	 */
-
+	//nothing yet
 
 	/**
-	 * need configuration
+	 * {@link Need}
+	 */
+	public static final Float NEED_SATISFACTION_THRESHOLD = .85f;
+	public static final Float NEED_PENALTY_THRESHOLD = .95f;
+
+	/**
+	 * {@link Need} {@link Hunger}
 	 */
 	public final static Float NEED_HUNGER_URGENCY_RATE = .1f;
-	public final static Pair<Float, Float> NEED_HUNGER_SATISFACTION_HEALTH_PHYSICAL = new
-			Pair<>(.05f, .01f);
-	public final static Pair<Class<? extends Resource>, Float> NEED_HUNGER_RESOURCE_FOOD = new
-			Pair(Food.class, 20f);
+	public final static Map<Class<? extends Health>, Float> NEED_HUNGER_HEALTH_PENALTY_MAP = new
+			HashMap<Class<? extends Health>, Float>() {
+				{
+					put(PhysicalHealth.class, .02f);
+				}
+			};
+	/**
+	 * {@link Need} {@link Awakeness}
+	 */
+	public final static Float NEED_AWAKENESS_URGENCY_RATE = .05f;
+	public final static Map<Class<? extends Health>, Float> NEED_AWAKENESS_HEALTH_PENALTY_MAP = new
+			HashMap<Class<? extends Health>, Float>() {{
+				put(PhysicalHealth.class, .01f);
+			}};
+	/**
+	 * {@link Activity} {@link Sleep}
+	 */
+	public static final Integer ACTIVITY_SLEEP_DURATION = 10;
+	//blank intended
+	public static final Map<Class<? extends Resource>, Float> ACTIVITY_SLEEP_CONSUMER_MAP = new HashMap<>();
+	public static final Map<Class<? extends Resource>, Float> ACTIVITY_SLEEP_PRODUCER_MAP = new HashMap<>();
+	public static final Map<Class<? extends Health>, Float> ACTIVITY_SLEEP_HEALTH_EFFECT_MAP = new
+			HashMap<Class<? extends Health>, Float>() {{
+				put(PhysicalHealth.class, .05f);
+			}};
 
-	public static final Float NEED_SATISFACTION_THRESHOLD = .95f;
+	/**
+	 * {@link Activity} {@link Eat}
+	 */
+	public static final Integer ACTIVITY_EAT_DURATION = 1;
+	//blank intended
+	public static final Map<Class<? extends Resource>, Float> ACTIVITY_EAT_CONSUMER_MAP = new
+			HashMap<Class<? extends Resource>, Float>() {{
+				put(Food.class, 20f);
+			}};
+	public static final Map<Class<? extends Resource>, Float> ACTIVITY_EAT_PRODUCER_MAP = new HashMap<>();
+	public static final Map<Class<? extends Health>, Float> ACTIVITY_EAT_HEALTH_EFFECT_MAP = new
+			HashMap<Class<? extends Health>, Float>() {{
+				put(PhysicalHealth.class, .15f);
+			}};
+
 }

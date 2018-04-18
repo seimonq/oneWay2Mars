@@ -1,10 +1,9 @@
-package oneway2mars.model.activity;
+package oneway2mars.model.cosmonaut.activity;
 
 import javafx.util.Pair;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
-import oneway2mars.util.classes.Effect;
 
 import java.util.Map;
 import java.util.Set;
@@ -76,11 +75,12 @@ public interface Activity {
 	void multiplySaturationBy(Float factor);
 
 	/**
-	 * @return map of {@link Effect} for each {@link Health} type
+	 * @return map with {@link Health} type and amount of positive gain each tick when activity
+	 * is active
 	 */
-	Map<Class<? extends Health>, Effect> getHealthEffectMap();
+	Map<Class<? extends Health>, Float> getHealthEffectMap();
 
-	void setHealthEffectMap(Map<Class<? extends Health>, Effect> healthEffectMap);
+	void setHealthEffectMap(Map<Class<? extends Health>, Float> healthEffectMap);
 
 	/**
 	 * @param currentTick current tick number

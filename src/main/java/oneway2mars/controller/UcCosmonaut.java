@@ -1,7 +1,8 @@
 package oneway2mars.controller;
 
-import oneway2mars.model.activity.Activity;
-import oneway2mars.model.activity.type.DoNothing;
+import com.sun.org.apache.xml.internal.security.Init;
+import oneway2mars.model.cosmonaut.activity.Activity;
+import oneway2mars.model.cosmonaut.activity.type.DoNothing;
 import oneway2mars.model.cosmonaut.Cosmonaut;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
@@ -32,14 +33,12 @@ public class UcCosmonaut {
 		livingCosmonauts.forEach(cos -> {
 			cos.shiftToNextTick();
 			changeOrContinueActivity(cos,currentTick);
-			applyActivityEffects(cos,resources);
+			applyActivityEffect(cos,resources);
+
+			applyNeedUrgencyPenalty(cos);
 			calcRiskOfDeath(cos);
 		});
-
-
-
 	}
-
 
 	private void calcRiskOfDeath(Cosmonaut cosmonaut) {
 			if (cosmonaut.getHealthSet().stream().anyMatch(health -> health.getHealthState() < 0.01f)) {
@@ -56,7 +55,16 @@ public class UcCosmonaut {
 		}
 	}
 
-	private void applyActivityEffects(Cosmonaut cosmonaut, Set<Resource> resources) {
+	private void applyNeedUrgencyPenalty(Cosmonaut cos) {
+		for(Need need : cos.getNeeds()) {
+			if(need.getUrgency() > InitialGameConstants.NEED_PENALTY_THRESHOLD) {
+				need.getHealthPenaltyMap().forEach((healthClass,penalty) -> {
+					MarsUtils.findElementByClass(cos.getHealthSet(),healthClass).add(-penalty);
+				});
+			}
+		}
+	}
+	private void applyActivityEffect(Cosmonaut cosmonaut, Set<Resource> resources) {
 
 		updateResourcesOnActivity(cosmonaut,resources);
 		applyHealthEffectOnActivity(cosmonaut);
@@ -76,13 +84,9 @@ public class UcCosmonaut {
 		Activity currentActivity = cosmonaut.getCurrentActivity();
 
 		currentActivity.getHealthEffectMap().forEach((healthClass, effect) -> {
-			if(currentActivity.getSaturation() == 1f) {
 				applyHealthEffects(MarsUtils.findElementByClass(cosmonaut.getHealthSet(),
-						healthClass),effect.getPositive());
-			} else {
-				applyHealthEffects(MarsUtils.findElementByClass(cosmonaut.getHealthSet(),
-						healthClass),effect.getNegative());
-			}
+						healthClass),effect, currentActivity.getSaturation());
+
 		});
 	}
 	private void reduceUrgencyOnActivity(Cosmonaut cosmonaut) {
@@ -90,7 +94,8 @@ public class UcCosmonaut {
 
 		if(currentActivity.getSaturation() == 1f) {
 			reduceUrgency(MarsUtils.findElementByClass(cosmonaut.getNeeds(),currentActivity
-					.getSatisfiedNeed().getKey()), currentActivity.getSatisfiedNeed().getValue());
+					.getSatisfiedNeed().getKey()), currentActivity.getSatisfiedNeed().getValue(),
+					currentActivity.getSaturation());
 		}
 	}
 	private Float consumeResource(Resource consumedResource, Float amount) {
@@ -105,12 +110,12 @@ public class UcCosmonaut {
 			return saturation;
 		}
 	}
-	private void applyHealthEffects(Health health, Float amount) {
-		health.add(amount);
+	private void applyHealthEffects(Health health, Float amount, Float saturation) {
+		health.add(amount*saturation);
 	}
 
-	private void reduceUrgency(Need need, Float amountReduced) {
-		need.addUrgency(amountReduced);
+	private void reduceUrgency(Need need, Float amountReduced, Float saturation) {
+		need.addUrgency(amountReduced*saturation);
 	}
 
 	private Activity findNextActivity(List<Need> needs, Set<Activity> activities) {

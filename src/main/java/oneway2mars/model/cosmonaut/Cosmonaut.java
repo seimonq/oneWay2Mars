@@ -1,6 +1,6 @@
 package oneway2mars.model.cosmonaut;
 
-import oneway2mars.model.activity.Activity;
+import oneway2mars.model.cosmonaut.activity.Activity;
 import oneway2mars.model.cosmonaut.health.Health;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.resource.Resource;
