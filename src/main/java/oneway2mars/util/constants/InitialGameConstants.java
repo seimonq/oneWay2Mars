@@ -1,5 +1,6 @@
 package oneway2mars.util.constants;
 
+import oneway2mars.model.cosmonaut.Cosmonaut;
 import oneway2mars.model.cosmonaut.activity.Activity;
 import oneway2mars.model.cosmonaut.activity.type.Eat;
 import oneway2mars.model.cosmonaut.activity.type.Sleep;
@@ -8,12 +9,12 @@ import oneway2mars.model.cosmonaut.health.type.PhysicalHealth;
 import oneway2mars.model.cosmonaut.need.Need;
 import oneway2mars.model.cosmonaut.need.type.Awakeness;
 import oneway2mars.model.cosmonaut.need.type.Hunger;
+import oneway2mars.model.cosmonaut.type.Siegmund;
 import oneway2mars.model.resource.Resource;
 import oneway2mars.model.resource.type.Food;
 import oneway2mars.util.classes.Effect;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static javax.swing.UIManager.put;
 
@@ -70,9 +71,9 @@ public final class InitialGameConstants {
 	public final static Float WATER_INIT_AMOUNT_MAX = 400.0f;
 
 	/**
-	 * cosmonaut configuration
+	 * {@link Cosmonaut} {@link Siegmund}
 	 */
-	//nothing yet
+
 
 	/**
 	 * health configuration
@@ -98,10 +99,10 @@ public final class InitialGameConstants {
 	/**
 	 * {@link Need} {@link Awakeness}
 	 */
-	public final static Float NEED_AWAKENESS_URGENCY_RATE = .05f;
+	public static final Float NEED_AWAKENESS_URGENCY_RATE = 0.05f;
 	public final static Map<Class<? extends Health>, Float> NEED_AWAKENESS_HEALTH_PENALTY_MAP = new
 			HashMap<Class<? extends Health>, Float>() {{
-				put(PhysicalHealth.class, .01f);
+				put(PhysicalHealth.class, 0.01f);
 			}};
 	/**
 	 * {@link Activity} {@link Sleep}
@@ -129,5 +130,6 @@ public final class InitialGameConstants {
 			HashMap<Class<? extends Health>, Float>() {{
 				put(PhysicalHealth.class, .15f);
 			}};
+
 
 }

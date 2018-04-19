@@ -1,9 +1,10 @@
 package oneway2mars.model.cosmonaut.activity.type;
 
 import oneway2mars.model.cosmonaut.activity.AbstractActivity;
+import oneway2mars.model.cosmonaut.activity.Activity;
 import oneway2mars.util.constants.InitialGameConstants;
 
-public class Sleep extends AbstractActivity{
+public class Sleep extends AbstractActivity implements Activity {
 
 	public Sleep() {
 		setDuration(InitialGameConstants.ACTIVITY_SLEEP_DURATION);

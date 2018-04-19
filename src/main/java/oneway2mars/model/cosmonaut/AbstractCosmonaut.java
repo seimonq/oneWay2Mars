@@ -11,7 +11,7 @@ import java.util.Set;
 public abstract class AbstractCosmonaut implements Cosmonaut {
 
 	private Set<Health> healthSet;
-	private List<Need> needSet;
+	private List<Need> needList;
 	private boolean alive;
 	private Activity lastActivity;
 	private Activity currentActivity;
@@ -30,12 +30,12 @@ public abstract class AbstractCosmonaut implements Cosmonaut {
 
 	@Override
 	public List<Need> getNeeds() {
-		return needSet;
+		return needList;
 	}
 
 	@Override
-	public void setNeeds(List<Need> needSet) {
-		this.needSet = needSet;
+	public void setNeeds(List<Need> needList) {
+		this.needList = needList;
 	}
 
 	@Override
@@ -50,8 +50,10 @@ public abstract class AbstractCosmonaut implements Cosmonaut {
 
 	@Override
 	public void shiftToNextTick() {
-		needSet.forEach(need -> need.updateUrgency(need.getUrgencyRate()));
-		getCurrentActivity().setSaturation(1f);
+		needList.forEach(need -> need.updateUrgency(need.getUrgencyRate()));
+		if(getCurrentActivity() != null) {
+			getCurrentActivity().setSaturation(1f);
+		}
 	}
 
 	@Override

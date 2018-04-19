@@ -30,11 +30,6 @@ public class GameController {
 				(), new OxigenGenerator(), new Rover(), new WaterTreatment())));
 
 		Cosmonaut siegmund = new Siegmund();
-		siegmund.setAlive(true);
-
-		siegmund.setHealthSet(new HashSet<>(Arrays.asList(new PhysicalHealth())));
-		siegmund.setNeeds(Arrays.asList(new Hunger()));
-
 		model.setCosmonauts(new HashSet<>(Arrays.asList(siegmund)));
 
 		Event findFood = new FindFood();

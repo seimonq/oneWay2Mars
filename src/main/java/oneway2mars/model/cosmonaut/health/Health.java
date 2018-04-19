@@ -16,26 +16,6 @@ public interface Health {
 	void setHealthState(Float healthState);
 
 	/**
-	 * factor between 0..1 how likely death is
-	 *
-	 * @return
-	 */
-	Float getRiskOfDeathFactor();
-
-	void setRiskOfDeathFactor(Float riskOfDeathFactor);
-
-	/**
-	 * satisfaction effects on health
-	 */
-
-	void satisfy(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
-
-	/**
-	 * dissatisfaction effects on health
-	 */
-	void dissatisfy(Map<Class<? extends Health>, Pair<Float, Float>> satisfactionMap);
-
-	/**
 	 * can be used to add or substract amount between MAX_AMOUNT and 0
 	 */
 	void add(Float addHealth);

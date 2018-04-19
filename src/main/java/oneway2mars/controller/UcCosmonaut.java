@@ -1,6 +1,5 @@
 package oneway2mars.controller;
 
-import com.sun.org.apache.xml.internal.security.Init;
 import oneway2mars.model.cosmonaut.activity.Activity;
 import oneway2mars.model.cosmonaut.activity.type.DoNothing;
 import oneway2mars.model.cosmonaut.Cosmonaut;
@@ -36,11 +35,11 @@ public class UcCosmonaut {
 			applyActivityEffect(cos,resources);
 
 			applyNeedUrgencyPenalty(cos);
-			calcRiskOfDeath(cos);
+			checkRiskOfDeath(cos);
 		});
 	}
 
-	private void calcRiskOfDeath(Cosmonaut cosmonaut) {
+	private void checkRiskOfDeath(Cosmonaut cosmonaut) {
 			if (cosmonaut.getHealthSet().stream().anyMatch(health -> health.getHealthState() < 0.01f)) {
 				cosmonaut.setAlive(false);
 			}
