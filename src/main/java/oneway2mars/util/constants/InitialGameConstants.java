@@ -25,7 +25,7 @@ public final class InitialGameConstants {
 	 */
 
 	public final static Float DEFAULT_CONDITION = 1.0f;
-	public final static Integer HEARTBEAT_PULSE = 2500;
+	public final static Integer HEARTBEAT_PULSE = 300;
 	/**
 	 * engine configuration
 	 */
@@ -36,7 +36,7 @@ public final class InitialGameConstants {
 	public final static Float HYDROGEN_GENERATOR_PROD_RATE = .2f;
 
 	public final static Float INSECT_FARM_CONS_RATE = 2.0f;
-	public final static Float INSECT_FARM_PROD_RATE = .1f;
+	public final static Float INSECT_FARM_PROD_RATE = 2.0f;
 
 	public final static Float NUCLEAR_REACTOR_PROD_RATE = 5.0f;
 
@@ -107,7 +107,7 @@ public final class InitialGameConstants {
 	/**
 	 * {@link Activity} {@link Sleep}
 	 */
-	public static final Integer ACTIVITY_SLEEP_DURATION = 10;
+	public static final Integer ACTIVITY_SLEEP_DURATION = 6;
 	//blank intended
 	public static final Map<Class<? extends Resource>, Float> ACTIVITY_SLEEP_CONSUMER_MAP = new HashMap<>();
 	public static final Map<Class<? extends Resource>, Float> ACTIVITY_SLEEP_PRODUCER_MAP = new HashMap<>();
@@ -115,6 +115,8 @@ public final class InitialGameConstants {
 			HashMap<Class<? extends Health>, Float>() {{
 				put(PhysicalHealth.class, .05f);
 			}};
+	public static final Float ACTIVITY_SLEEP_SATISFACTION = .15f;
+
 
 	/**
 	 * {@link Activity} {@link Eat}
@@ -132,4 +134,5 @@ public final class InitialGameConstants {
 			}};
 
 
+	public static final Float ACTIVITY_EAT_SATISFACTION = .5f;
 }

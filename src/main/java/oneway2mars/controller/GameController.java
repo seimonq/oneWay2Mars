@@ -37,7 +37,8 @@ public class GameController {
 		findFood.setActive(false);
 		findFood.setEffectTime(2);
 
-		model.setEvents(new HashSet<>(Arrays.asList(findFood)));
+		//model.setEvents(new HashSet<>(Arrays.asList(findFood)));
+		model.setEvents(new HashSet<>());
 		model.setEventAwaitsDecision(Optional.empty());
 
 	}

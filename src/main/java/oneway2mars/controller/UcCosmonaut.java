@@ -26,13 +26,13 @@ public class UcCosmonaut {
 	public void updateCosmonautState(Set<Cosmonaut> cosmonauts, Set<Resource> resources, Long
 			currentTick) {
 
-		Set<Cosmonaut> livingCosmonauts = cosmonauts.stream().filter( c -> c.isAlive()).collect
+		Set<Cosmonaut> livingCosmonauts = cosmonauts.stream().filter(c -> c.isAlive()).collect
 				(Collectors.toSet());
 
 		livingCosmonauts.forEach(cos -> {
 			cos.shiftToNextTick();
-			changeOrContinueActivity(cos,currentTick);
-			applyActivityEffect(cos,resources);
+			updateActivity(cos, currentTick);
+			applyActivityEffect(cos, resources);
 
 			applyNeedUrgencyPenalty(cos);
 			checkRiskOfDeath(cos);
@@ -40,38 +40,45 @@ public class UcCosmonaut {
 	}
 
 	private void checkRiskOfDeath(Cosmonaut cosmonaut) {
-			if (cosmonaut.getHealthSet().stream().anyMatch(health -> health.getHealthState() < 0.01f)) {
-				cosmonaut.setAlive(false);
-			}
+		if (cosmonaut.getHealthSet().stream().anyMatch(health -> health.getHealthState() < 0.01f)) {
+			cosmonaut.setAlive(false);
+		}
 	}
 
-	private void changeOrContinueActivity(Cosmonaut cosmonaut, Long currentTick) {
+	private void updateActivity(Cosmonaut cosmonaut, Long currentTick) {
 		if (cosmonaut.getCurrentActivity() == null || !cosmonaut.getCurrentActivity()
 				.continueActivity(currentTick)) {
 			cosmonaut.setLastActivity(cosmonaut.getCurrentActivity());
 			cosmonaut.setCurrentActivity(findNextActivity(cosmonaut.getNeeds(), cosmonaut.getAvailableActivities()));
-			cosmonaut.getCurrentActivity().startActivity(currentTick);
+
+			if (cosmonaut.getCurrentActivity() != null) {
+				cosmonaut.getCurrentActivity().startActivity(currentTick);
+			}
 		}
 	}
 
 	private void applyNeedUrgencyPenalty(Cosmonaut cos) {
-		for(Need need : cos.getNeeds()) {
-			if(need.getUrgency() > InitialGameConstants.NEED_PENALTY_THRESHOLD) {
-				need.getHealthPenaltyMap().forEach((healthClass,penalty) -> {
-					MarsUtils.findElementByClass(cos.getHealthSet(),healthClass).add(-penalty);
+		for (Need need : cos.getNeeds()) {
+			if (need.getUrgency() > InitialGameConstants.NEED_PENALTY_THRESHOLD) {
+				need.getHealthPenaltyMap().forEach((healthClass, penalty) -> {
+					MarsUtils.findElementByClass(cos.getHealthSet(), healthClass).add(-penalty);
 				});
 			}
 		}
 	}
+
 	private void applyActivityEffect(Cosmonaut cosmonaut, Set<Resource> resources) {
 
-		updateResourcesOnActivity(cosmonaut,resources);
-		applyHealthEffectOnActivity(cosmonaut);
-		reduceUrgencyOnActivity(cosmonaut);
-
-	}
-	private void updateResourcesOnActivity(Cosmonaut cosmonaut, Set<Resource> resources) {
 		Activity currentActivity = cosmonaut.getCurrentActivity();
+
+		if (currentActivity != null) {
+			updateResourcesOnActivity(currentActivity, resources);
+			applyHealthEffectOnActivity(currentActivity, cosmonaut);
+			reduceUrgencyOnActivity(currentActivity, cosmonaut);
+		}
+	}
+
+	private void updateResourcesOnActivity(Activity currentActivity, Set<Resource> resources) {
 
 		currentActivity.getConsumerMap().forEach((resClass, amount) -> {
 			Float saturationForConsumedResource = consumeResource(MarsUtils.findElementByClass(resources,
@@ -79,24 +86,29 @@ public class UcCosmonaut {
 			currentActivity.multiplySaturationBy(saturationForConsumedResource);
 		});
 	}
-	private void applyHealthEffectOnActivity(Cosmonaut cosmonaut) {
-		Activity currentActivity = cosmonaut.getCurrentActivity();
 
+	private void applyHealthEffectOnActivity(Activity currentActivity, Cosmonaut cosmonaut) {
+
+		if(cosmonaut.getNeeds().stream().filter(need -> need.getUrgency() >= 1.0f).findAny()
+				.isPresent()) {
+			//do not apply health positive impact
+			return;
+		}
 		currentActivity.getHealthEffectMap().forEach((healthClass, effect) -> {
-				applyHealthEffects(MarsUtils.findElementByClass(cosmonaut.getHealthSet(),
-						healthClass),effect, currentActivity.getSaturation());
+			applyHealthEffects(MarsUtils.findElementByClass(cosmonaut.getHealthSet(),
+					healthClass), effect, currentActivity.getSaturation());
 
 		});
 	}
-	private void reduceUrgencyOnActivity(Cosmonaut cosmonaut) {
-		Activity currentActivity = cosmonaut.getCurrentActivity();
 
-		if(currentActivity.getSaturation() == 1f) {
-			reduceUrgency(MarsUtils.findElementByClass(cosmonaut.getNeeds(),currentActivity
-					.getSatisfiedNeed().getKey()), currentActivity.getSatisfiedNeed().getValue(),
+	private void reduceUrgencyOnActivity(Activity currentActivity, Cosmonaut cosmonaut) {
+		if (currentActivity.getSaturation() == 1f) {
+			reduceUrgency(MarsUtils.findElementByClass(cosmonaut.getNeeds(), currentActivity
+							.getSatisfiedNeed().getKey()), currentActivity.getSatisfiedNeed().getValue(),
 					currentActivity.getSaturation());
 		}
 	}
+
 	private Float consumeResource(Resource consumedResource, Float amount) {
 
 		if (consumedResource.inStock(amount)) {
@@ -109,18 +121,19 @@ public class UcCosmonaut {
 			return saturation;
 		}
 	}
+
 	private void applyHealthEffects(Health health, Float amount, Float saturation) {
-		health.add(amount*saturation);
+		health.add(amount * saturation);
 	}
 
 	private void reduceUrgency(Need need, Float amountReduced, Float saturation) {
-		need.addUrgency(amountReduced*saturation);
+		need.addUrgency(- amountReduced * saturation);
 	}
 
 	private Activity findNextActivity(List<Need> needs, Set<Activity> activities) {
 
-		Activity newActivity = new DoNothing();
-			//if no needs are urgent enough the cosmonaut does nothing so far
+		Activity newActivity = null;
+		//if no needs are urgent enough the cosmonaut does nothing so far
 		for (Need need : needs) {
 			if (need.getUrgency() > InitialGameConstants.NEED_SATISFACTION_THRESHOLD) {
 

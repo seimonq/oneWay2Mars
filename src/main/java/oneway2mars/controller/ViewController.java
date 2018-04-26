@@ -79,6 +79,13 @@ public class ViewController {
 				cosmonautString += need.getClass().getSimpleName() + " - Urgency: " + need
 						.getUrgency() + " ";
 			});
+
+			cosmonautString += "\n Aktuelle Aktivität: ";
+			if(cos.getCurrentActivity() != null) {
+				cosmonautString += cos.getCurrentActivity().getClass().getSimpleName() + ", " +
+						"begonnen: " +cos
+						.getCurrentActivity().getStarted();
+			}
 			cosmonautString += "\n Lebendig: " + cos.isAlive();
 
 		}
@@ -91,6 +98,8 @@ public class ViewController {
 
 		Element outputEvent = nifty.getCurrentScreen().findElementById("outputEvent");
 		String eventString = "";
+
+		eventString += "Round: " + model.getCurrentTick() + "\n\n";
 
 		Set<Event> activeEvents = model.getEvents().stream().filter( ev -> ev.isActive()).collect
 				(Collectors.toSet());
@@ -110,7 +119,8 @@ public class ViewController {
 			outputEvent.getRenderer(TextRenderer.class).setText(eventString);
 
 		} else {
-			outputEvent.getRenderer(TextRenderer.class).setText("No ongoing events.");
+			eventString += "No ongoing events";
+			outputEvent.getRenderer(TextRenderer.class).setText(eventString);
 
 		}
 		if (model.getCosmonauts().stream().anyMatch(cos -> !cos.isAlive())) {
